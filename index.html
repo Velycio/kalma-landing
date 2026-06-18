@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kalma — Tu compañera de embarazo</title>
+  <meta name="description" content="Kalma te acompaña semana a semana durante el embarazo: timer de contracciones, contador de patadas, diario, bebé semana a semana y todo compartido con tu pareja. Únete a la beta de Android." />
+  <meta name="theme-color" content="#C5718A" />
+  <link rel="canonical" href="https://kalmaapp.pro/" />
+
+  <!-- Favicon emoji 🌸 -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>" />
+  <link rel="apple-touch-icon" href="assets/app-icon.png" />
+  <link rel="preload" as="image" href="assets/screen-overview.jpg" fetchpriority="high" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kalma" />
+  <meta property="og:title" content="Kalma — Tu compañera de embarazo" />
+  <meta property="og:description" content="La app que te acompaña semana a semana, desde el test hasta el parto. Únete a la beta gratuita de Android." />
+  <meta property="og:url" content="https://kalmaapp.pro/" />
+  <meta property="og:image" content="https://kalmaapp.pro/assets/og-image.png" />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kalma — Tu compañera de embarazo" />
+  <meta name="twitter:description" content="La app que te acompaña semana a semana, desde el test hasta el parto. Únete a la beta gratuita de Android." />
+  <meta name="twitter:image" content="https://kalmaapp.pro/assets/og-image.png" />
+
+  <!-- SEO -->
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Velycio" />
+  <meta name="keywords" content="app embarazo, contracciones, contador de patadas, diario embarazo, bebé semana a semana, beta Android" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Kalma",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Android",
+    "description": "App de embarazo que acompaña semana a semana: contracciones, patadas, diario, bebé semana a semana y todo compartido con tu pareja.",
+    "url": "https://kalmaapp.pro/",
+    "image": "https://kalmaapp.pro/assets/og-image.png",
+    "inLanguage": "es-ES",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Gratis durante la beta" },
+    "author": { "@type": "Organization", "name": "Velycio", "email": "info@velycio.com" }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --rose: #C5718A;
+      --rose-deep: #A8576F;
+      --rose-bright: #D45F78;
+      --plum: #4B2E38;
+      --muted: #8A6B74;
+      --cream: #FDFAF8;
+      --pink-50: #FBEEF2;
+      --pink-100: #F8E3EA;
+      --pink-200: #F3D2DE;
+      --white: #FFFFFF;
+      --shadow-sm: 0 2px 10px rgba(75, 46, 56, 0.06);
+      --shadow-md: 0 12px 34px rgba(168, 87, 111, 0.14);
+      --shadow-lg: 0 26px 60px rgba(168, 87, 111, 0.22);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --maxw: 1120px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      color: var(--plum);
+      background: var(--cream);
+      line-height: 1.65;
+      font-size: 17px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Soft gradient + floral atmosphere */
+    .bg-deco {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(60% 50% at 85% 0%, rgba(212, 95, 120, 0.18), transparent 70%),
+        radial-gradient(55% 45% at 0% 18%, rgba(197, 113, 138, 0.16), transparent 70%),
+        linear-gradient(180deg, #FBE7EE 0%, #FDF1EE 38%, var(--cream) 70%);
+    }
+    .bg-deco::before, .bg-deco::after {
+      content: ""; position: absolute; border-radius: 50%; filter: blur(8px); opacity: .5;
+    }
+
+    h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; line-height: 1.1; letter-spacing: -0.01em; color: var(--plum); }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+    /* ===== Buttons ===== */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 17px;
+      padding: 16px 28px; border-radius: 100px; border: 0; cursor: pointer;
+      text-decoration: none; min-height: 52px; line-height: 1;
+      transition: transform .18s var(--ease), box-shadow .25s var(--ease), background .25s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rose-bright), var(--rose));
+      color: #fff; box-shadow: 0 12px 26px rgba(197, 113, 138, 0.42);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 34px rgba(197, 113, 138, 0.5); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.85); color: var(--rose-deep);
+      box-shadow: var(--shadow-sm); border: 1.5px solid var(--pink-200);
+    }
+    .btn-secondary:hover { transform: translateY(-2px); background: #fff; }
+    .btn:focus-visible { outline: 3px solid var(--rose-deep); outline-offset: 3px; }
+    .skip { position: absolute; left: 12px; top: -64px; z-index: 300; background: var(--rose); color: #fff; padding: 11px 18px; border-radius: 10px; font-weight: 800; text-decoration: none; transition: top .2s var(--ease); }
+    .skip:focus { top: 12px; }
+    .store-badge:focus-visible, .foot-links a:focus-visible, .brand:focus-visible, .pill:focus-visible { outline: 3px solid var(--rose-deep); outline-offset: 3px; border-radius: 12px; }
+
+    /* ===== Nav ===== */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: saturate(1.4) blur(12px);
+      -webkit-backdrop-filter: saturate(1.4) blur(12px);
+      background: rgba(253, 244, 243, 0.78);
+      border-bottom: 1px solid rgba(168, 87, 111, 0.08);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand img { width: 34px; height: 34px; }
+    .brand span {
+      font-family: 'Fraunces', serif; font-weight: 600; font-size: 25px;
+      letter-spacing: .02em; color: var(--plum);
+    }
+    .nav .btn { padding: 11px 20px; min-height: 44px; font-size: 15px; }
+
+    /* ===== Hero ===== */
+    .hero { padding: 48px 0 28px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr; gap: 30px; align-items: center; text-align: center; justify-items: center; }
+    .hero-text { max-width: 660px; }
+    .hero-shot { width: min(300px, 72vw); margin-top: 36px; }
+    .hero-shot img { width: 100%; height: auto; display: block; border-radius: 30px; border: 6px solid #fff; box-shadow: var(--shadow-lg); }
+    .pill {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: rgba(255,255,255,0.7); border: 1px solid var(--pink-200);
+      color: var(--rose-deep); font-weight: 800; font-size: 13.5px;
+      padding: 8px 16px; border-radius: 100px; box-shadow: var(--shadow-sm);
+      letter-spacing: .01em;
+    }
+    .pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--rose-bright); box-shadow: 0 0 0 0 rgba(212,95,120,.55); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(212,95,120,.5);} 70%{box-shadow:0 0 0 9px rgba(212,95,120,0);} 100%{box-shadow:0 0 0 0 rgba(212,95,120,0);} }
+
+    .hero h1 { font-size: clamp(2.6rem, 9vw, 4.1rem); margin: 18px 0 0; }
+    .hero h1 em { font-style: italic; color: var(--rose); font-weight: 500; }
+    .hero .sub { font-size: clamp(1.05rem, 4vw, 1.28rem); color: var(--muted); margin: 18px auto 28px; max-width: 36ch; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 13px; justify-content: center; }
+    .trust { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 22px; color: var(--muted); font-size: 14.5px; font-weight: 700; justify-content: center; }
+    .trust span { display: inline-flex; align-items: center; gap: 7px; }
+    .trust b { color: var(--rose-deep); }
+
+    /* App lockup + store badges (aspecto de app) */
+    .hero-app { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .hero-app img { width: 56px; height: 56px; border-radius: 14px; box-shadow: var(--shadow-md); }
+    .hero-app strong { display: block; font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.5rem; color: var(--plum); line-height: 1.05; }
+    .hero-app span { font-weight: 800; font-size: 12.5px; color: var(--rose-deep); letter-spacing: .03em; }
+    .store-badge { display: inline-flex; align-items: center; gap: 11px; width: 224px; background: linear-gradient(135deg, var(--rose-bright), var(--rose)); color: #fff; padding: 11px 20px; border-radius: 15px; text-decoration: none; min-height: 58px; box-shadow: 0 12px 26px rgba(197,113,138,0.42); transition: transform .18s var(--ease), box-shadow .25s var(--ease); }
+    .store-badge:hover { transform: translateY(-2px); box-shadow: 0 18px 34px rgba(197,113,138,0.5); }
+    .store-badge.ghost { background: #fff; color: var(--rose-deep); border: 1.5px solid var(--pink-200); box-shadow: var(--shadow-sm); }
+    .store-badge .sb-ico { flex: 0 0 auto; }
+    .store-badge .sb-txt { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
+    .store-badge .sb-txt small { font-size: 10.5px; font-weight: 700; opacity: .85; text-transform: uppercase; letter-spacing: .04em; }
+    .store-badge .sb-txt strong { font-size: 17px; font-weight: 800; }
+
+    /* Showcase — carrusel en movimiento */
+    .marquee { position: relative; width: 100%; overflow: hidden;
+      -webkit-mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+    .marquee-track { display: flex; gap: 20px; width: max-content; padding: 6px 10px; animation: marquee 60s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee figure { flex: 0 0 auto; width: 264px; margin: 0; }
+    .marquee img { width: 100%; height: auto; display: block; border-radius: 26px; box-shadow: var(--shadow-md); }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ===== Beta strip (urgencia) ===== */
+    .beta-strip { margin: 10px 0 4px; }
+    .beta-card {
+      max-width: 700px; margin: 0 auto;
+      background: linear-gradient(135deg, var(--rose), var(--rose-bright));
+      color: #fff; border-radius: var(--radius); padding: 24px 26px;
+      display: flex; flex-direction: column; align-items: center; gap: 13px;
+      text-align: center; box-shadow: var(--shadow-md);
+    }
+    .beta-card .fire { font-size: clamp(1.02rem, 3.6vw, 1.22rem); font-weight: 800; line-height: 1.35; }
+    .beta-bar { width: 100%; max-width: 440px; height: 12px; border-radius: 100px; background: rgba(255,255,255,0.32); overflow: hidden; }
+    .beta-bar > span { display: block; height: 100%; width: 8%; border-radius: 100px; background: #fff; transition: width 1.5s var(--ease); }
+    .beta-card small { font-weight: 700; opacity: .95; font-size: 13.5px; }
+    .beta-card .btn { background: #fff; color: var(--rose-deep); margin-top: 2px; }
+
+    /* ===== Section shells ===== */
+    section { padding: 56px 0; }
+    .head { text-align: center; max-width: 620px; margin: 0 auto 40px; }
+    .head h2 { font-size: clamp(2rem, 6vw, 2.8rem); }
+    .head p { color: var(--muted); margin-top: 12px; font-size: 1.08rem; }
+    .eyebrow { color: var(--rose); font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+
+    /* ===== Features ===== */
+    .features { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .feature {
+      background: rgba(255,255,255,0.9); border: 1px solid rgba(168,87,111,0.08);
+      border-radius: var(--radius); padding: 26px 24px; box-shadow: var(--shadow-sm);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .feature .ico {
+      width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center;
+      font-size: 28px; background: linear-gradient(135deg, var(--pink-100), var(--pink-200));
+      margin-bottom: 16px;
+    }
+    .feature h3 { font-size: 1.32rem; margin-bottom: 6px; }
+    .feature p { color: var(--muted); font-size: 1rem; }
+
+    /* ===== Gallery ===== */
+    .gallery-scroll {
+      display: flex; gap: 18px; overflow-x: auto; padding: 8px 22px 26px;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+    .shot { flex: 0 0 auto; scroll-snap-align: center; width: 248px; }
+    .shot img { width: 100%; border-radius: 26px; box-shadow: var(--shadow-md); border: 5px solid #fff; }
+    .shot p { text-align: center; margin-top: 12px; font-weight: 800; color: var(--rose-deep); font-size: 15px; }
+    .scroll-hint { text-align: center; color: var(--muted); font-size: 14px; font-weight: 700; margin-top: 2px; }
+
+    /* ===== Steps ===== */
+    .steps-sec { background: linear-gradient(180deg, transparent, rgba(248,227,234,0.55)); }
+    .steps { display: grid; grid-template-columns: 1fr; gap: 18px; max-width: 760px; margin: 0 auto; }
+    .step { display: flex; gap: 18px; align-items: flex-start; background: rgba(255,255,255,0.85); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow-sm); }
+    .step .n { flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--rose-bright), var(--rose)); color: #fff; font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.4rem; display: grid; place-items: center; }
+    .step h3 { font-size: 1.2rem; margin-bottom: 4px; }
+    .step p { color: var(--muted); font-size: 1rem; }
+
+    /* ===== Valor / Velycio ===== */
+    .value-card { max-width: 760px; margin: 0 auto; text-align: center; background: rgba(255,255,255,0.92); border: 1px solid rgba(168,87,111,0.1); border-radius: 28px; padding: 40px 26px; box-shadow: var(--shadow-md); }
+    .value-card h2 { font-size: clamp(1.6rem, 5.4vw, 2.3rem); margin: 8px 0 14px; }
+    .value-card > p { color: var(--muted); font-size: 1.06rem; max-width: 60ch; margin: 0 auto; }
+    .value-card b { color: var(--plum); }
+    .perks { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 24px auto 26px; max-width: 430px; text-align: left; font-weight: 700; font-size: 1rem; }
+    .perks li { background: var(--pink-50); padding: 13px 16px; border-radius: 14px; }
+
+    /* ===== Forms ===== */
+    .form-sec { padding-top: 30px; }
+    .form-grid { display: grid; grid-template-columns: 1fr; gap: 22px; max-width: 980px; margin: 0 auto; }
+    .form-card {
+      background: rgba(255,255,255,0.95); border-radius: 26px; padding: 32px 26px;
+      box-shadow: var(--shadow-md); border: 1px solid rgba(168,87,111,0.08);
+    }
+    .form-card.android { border-top: 5px solid var(--rose); }
+    .form-card.ios { border-top: 5px solid var(--plum); }
+    .form-card .tag { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--rose-deep); margin-bottom: 10px; }
+    .form-card h3 { font-size: 1.7rem; margin-bottom: 6px; }
+    .form-card .lead { color: var(--muted); margin-bottom: 22px; }
+
+    /* App badge (estilo App Store) */
+    .app-badge { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--pink-100); }
+    .app-icon { width: 66px; height: 66px; border-radius: 16px; box-shadow: var(--shadow-md); flex: 0 0 auto; }
+    .app-meta { display: flex; flex-direction: column; line-height: 1.25; }
+    .app-meta strong { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.35rem; color: var(--plum); }
+    .app-meta small { color: var(--muted); font-weight: 700; font-size: 13px; }
+    .app-plat { margin-left: auto; background: var(--pink-50); color: var(--rose-deep); font-weight: 800; font-size: 12px; padding: 7px 13px; border-radius: 100px; border: 1px solid var(--pink-200); white-space: nowrap; }
+
+    .field { margin-bottom: 16px; }
+    label.lbl { display: block; font-weight: 800; font-size: 14.5px; margin-bottom: 7px; color: var(--plum); }
+    label.lbl .req { color: var(--rose-bright); }
+    .field input[type="text"], .field input[type="email"] {
+      width: 100%; font-family: 'Nunito', sans-serif; font-size: 16px; color: var(--plum);
+      padding: 14px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--pink-200);
+      background: #fff; transition: border-color .2s, box-shadow .2s; min-height: 52px;
+    }
+    .field input:focus { outline: none; border-color: var(--rose); box-shadow: 0 0 0 4px rgba(197,113,138,0.16); }
+    .field input::placeholder { color: #c5a9b1; }
+
+    .check {
+      display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px;
+      background: var(--pink-50); border: 1.5px solid var(--pink-200); border-radius: var(--radius-sm);
+      cursor: pointer; margin-bottom: 18px;
+    }
+    .check input { width: 22px; height: 22px; min-width: 22px; margin-top: 2px; accent-color: var(--rose); cursor: pointer; }
+    .check span { font-weight: 700; font-size: 15px; }
+    .check span small { display: block; font-weight: 600; color: var(--muted); font-size: 13px; }
+    .form-card .btn { width: 100%; }
+    .err { color: var(--rose-deep); font-weight: 800; font-size: 14px; margin-top: 10px; display: none; }
+    .hp { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+
+    /* Success state */
+    .success { display: none; text-align: center; padding: 20px 6px; animation: pop .4s var(--ease); }
+    .success.show { display: block; }
+    .success .ck { width: 66px; height: 66px; margin: 0 auto 16px; border-radius: 50%; background: linear-gradient(135deg, var(--rose-bright), var(--rose)); display: grid; place-items: center; color: #fff; font-size: 34px; }
+    .success h3 { font-size: 1.5rem; margin-bottom: 8px; }
+    .success p { color: var(--muted); }
+    @keyframes pop { 0%{transform:scale(.92); opacity:0;} 100%{transform:scale(1); opacity:1;} }
+    .form-hidden { display: none !important; }
+
+    /* ===== Footer ===== */
+    footer { background: var(--plum); color: #f2e4e8; padding: 44px 0 36px; margin-top: 30px; }
+    .foot { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+    .foot .brand span { color: #fff; }
+    .foot .brand img { filter: brightness(0) invert(1) sepia(0) saturate(2) hue-rotate(300deg); }
+    .foot-links { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; font-weight: 700; font-size: 15px; }
+    .foot-links a { color: #f2c9d4; text-decoration: none; }
+    .foot-links a:hover { text-decoration: underline; }
+    .foot small { color: #cbaab3; font-size: 13.5px; }
+
+    /* ===== Reveal anim ===== */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ===== Dynamism layer ===== */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 200;
+      background: linear-gradient(90deg, var(--rose-bright), var(--rose));
+      box-shadow: 0 0 8px rgba(212,95,120,.55); transition: width .08s linear;
+    }
+    .petals { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+    .petal {
+      position: absolute; top: -10%; border-radius: 50%;
+      background: radial-gradient(circle at 32% 30%, #fff, var(--rose-bright) 78%);
+      box-shadow: 0 0 7px rgba(212,95,120,.22);
+      will-change: transform; animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(-12vh) translateX(0) rotate(0deg); }
+      100% { transform: translateY(112vh) translateX(46px) rotate(380deg); }
+    }
+    .feature { will-change: transform; }
+    .shot img { transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+    .shot:hover img { transform: translateY(-7px) scale(1.025); box-shadow: var(--shadow-lg); }
+
+    .dots { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink-200); transition: all .28s var(--ease); }
+    .dot.active { background: var(--rose); width: 24px; border-radius: 100px; }
+
+    .mobile-cta {
+      position: fixed; left: 14px; right: 14px; bottom: 14px; z-index: 150;
+      padding: 9px; border-radius: 100px;
+      background: rgba(253,244,243,.93); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 12px 30px rgba(168,87,111,.3); border: 1px solid var(--pink-200);
+      transform: translateY(160%); transition: transform .45s var(--ease);
+    }
+    .mobile-cta.show { transform: none; }
+    .mobile-cta .btn { width: 100%; padding: 14px; min-height: 50px; }
+    @media (min-width: 760px) { .mobile-cta { display: none; } }
+
+    /* ===== Responsive ===== */
+    @media (min-width: 720px) {
+      .features { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .steps { grid-template-columns: repeat(3, 1fr); }
+      .step { flex-direction: column; }
+      .form-grid { grid-template-columns: 1.15fr 0.85fr; }
+    }
+    @media (min-width: 820px) {
+      .showcase { grid-template-columns: repeat(2, 1fr); max-width: 880px; gap: 32px; }
+    }
+    @media (min-width: 940px) {
+      .hero { padding: 64px 0 40px; }
+      .hero-grid { grid-template-columns: 1.02fr 0.98fr; gap: 50px; text-align: left; justify-items: stretch; }
+      .hero .sub { font-size: 1.3rem; margin-left: 0; margin-right: 0; }
+      .cta-row, .trust { justify-content: flex-start; }
+      .hero-shot { width: 330px; margin-top: 0; justify-self: center; }
+      .features { grid-template-columns: repeat(3, 1fr); }
+      section { padding: 72px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+      .petals { display: none; }
+      .marquee { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#top">Saltar al contenido</a>
+  <div class="bg-deco" aria-hidden="true"></div>
+  <div class="scroll-progress" id="progress" aria-hidden="true"></div>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+
+  <!-- ===== NAV ===== -->
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Kalma — inicio">
+        <img src="assets/logo-rose.svg" alt="" width="34" height="34" />
+        <span>Kalma</span>
+      </a>
+      <a class="btn btn-primary" href="#beta">Únete a la beta</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text reveal">
+          <div class="hero-app">
+            <img src="assets/app-icon.png" alt="Icono de la app Kalma" width="56" height="56" />
+            <div><strong>Kalma</strong><span>App de embarazo · Android</span></div>
+          </div>
+          <span class="pill"><span class="pulse" aria-hidden="true"></span> Beta abierta · Quedan 12 de 100 plazas</span>
+          <h1>Tu <em>compañera</em> de embarazo</h1>
+          <p class="sub">Semana a semana, desde el test hasta el parto. Todo lo que necesitas en una sola app, y compartido con quien más te importa.</p>
+          <div class="cta-row">
+            <a class="store-badge" href="#beta" aria-label="Únete a la beta en Google Play">
+              <svg class="sb-ico" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M4 3.4v17.2a1 1 0 0 0 1.5.86l14.3-8.6a1 1 0 0 0 0-1.72L5.5 2.54A1 1 0 0 0 4 3.4Z"/></svg>
+              <span class="sb-txt"><small>Únete a la beta en</small><strong>Google Play</strong></span>
+            </a>
+            <a class="store-badge ghost" href="#ios" aria-label="Avísame cuando esté en App Store">
+              <svg class="sb-ico" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M17.05 12.6c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.1-2.02-3.78-2.04-1.6-.16-3.13.94-3.94.94-.82 0-1.72-.92-3.06-.9-1.57.03-3.03.92-3.84 2.32-1.64 2.85-.42 7.06 1.18 9.37.78 1.13 1.71 2.4 2.93 2.36 1.18-.05 1.62-.76 3.05-.76 1.42 0 1.82.76 3.06.74 1.27-.02 2.07-1.15 2.85-2.29.9-1.31 1.27-2.58 1.29-2.65-.03-.01-2.47-.95-2.49-3.76ZM14.77 4.84c.65-.79 1.09-1.89.97-2.99-.94.04-2.08.63-2.75 1.42-.6.7-1.13 1.82-.99 2.89 1.05.08 2.12-.53 2.77-1.32Z"/></svg>
+              <span class="sb-txt"><small>Pronto en</small><strong>App Store</strong></span>
+            </a>
+          </div>
+          <div class="trust">
+            <span>🌸 <b>Gratis</b> en la beta</span>
+            <span>🔒 Tus datos, privados</span>
+            <span>💗 Hecha con cariño</span>
+          </div>
+        </div>
+        <div class="hero-shot">
+          <img src="assets/screen-overview.jpg" width="760" height="1555" fetchpriority="high" decoding="async"
+               alt="Pantalla principal de Kalma con la cuenta atrás del embarazo y accesos a contracciones, bolsa rota, diario y calendario." />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BETA STRIP (urgencia) ===== -->
+    <div class="wrap beta-strip">
+      <div class="beta-card reveal">
+        <p class="fire">🔥 Solo quedan <b>12 plazas de 100</b> para probar la app — ¡date prisa!</p>
+        <div class="beta-bar" id="betaBar" aria-hidden="true"><span></span></div>
+        <small>88 de 100 plazas ya reservadas</small>
+        <a class="btn" href="#beta">Quiero mi plaza</a>
+      </div>
+    </div>
+
+    <!-- ===== FEATURES ===== -->
+    <section id="features">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Todo en una app</span>
+          <h2>Lo que vives, acompañado</h2>
+          <p>Las herramientas que de verdad usas durante el embarazo, sin complicaciones ni lenguaje de hospital.</p>
+        </div>
+        <div class="features">
+          <div class="feature reveal"><div class="ico" aria-hidden="true">⏱️</div><h3>Timer de contracciones</h3><p>Registra cada contracción y Kalma detecta la regla 5-1-1 para avisarte cuándo ir al hospital.</p></div>
+          <div class="feature reveal"><div class="ico" aria-hidden="true">👣</div><h3>Contador de patadas</h3><p>Lleva la cuenta de los movimientos de tu bebé desde la semana 28, fácil y rápido.</p></div>
+          <div class="feature reveal"><div class="ico" aria-hidden="true">📖</div><h3>Diario de embarazo</h3><p>Guarda fotos, ecografías y momentos. El álbum que conservarás para siempre.</p></div>
+          <div class="feature reveal"><div class="ico" aria-hidden="true">🤰</div><h3>Bebé semana a semana</h3><p>Su tamaño, su peso y cada avance. Una nueva sorpresa cada semana.</p></div>
+          <div class="feature reveal"><div class="ico" aria-hidden="true">🧳</div><h3>Bolsa del hospital</h3><p>Checklist para que no se te olvide nada cuando llegue el momento.</p></div>
+          <div class="feature reveal"><div class="ico" aria-hidden="true">💞</div><h3>Sincronizada con tu pareja</h3><p>Comparte tu embarazo al instante: contracciones, avances y recuerdos, en tiempo real.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SHOWCASE (carrusel en movimiento) ===== -->
+    <section id="por-dentro">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Por dentro</span>
+          <h2>Así es Kalma</h2>
+          <p>Cálida, clara y pensada para acompañarte en cada momento del embarazo.</p>
+        </div>
+      </div>
+      <div class="marquee" aria-label="Capturas de la app Kalma">
+        <div class="marquee-track">
+          <figure><img loading="lazy" src="assets/screen-contractions.jpg" width="760" height="1647" alt="Pantalla de contracciones de Kalma con cronómetro y aviso 5-1-1." /></figure>
+          <figure><img loading="lazy" src="assets/screen-baby.jpg" width="760" height="1647" alt="Seguimiento del bebé semana a semana en Kalma." /></figure>
+          <figure><img loading="lazy" src="assets/screen-waterbreak.jpg" width="760" height="1647" alt="Pantalla de bolsa rota de Kalma." /></figure>
+          <figure><img loading="lazy" src="assets/screen-diary.jpg" width="760" height="1647" alt="Diario de Kalma con fotos y ecografías." /></figure>
+          <figure><img loading="lazy" src="assets/screen-calendar.jpg" width="760" height="1647" alt="Calendario de citas médicas de Kalma." /></figure>
+          <figure><img loading="lazy" src="assets/screen-faq.jpg" width="760" height="1647" alt="Dudas frecuentes de Kalma por trimestre." /></figure>
+          <figure><img loading="lazy" src="assets/screen-partner.jpg" width="760" height="1647" alt="Kalma para compartir el embarazo con tu pareja." /></figure>
+          <figure aria-hidden="true"><img loading="lazy" src="assets/screen-contractions.jpg" width="760" height="1647" alt="" /></figure>
+          <figure aria-hidden="true"><img loading="lazy" src="assets/screen-baby.jpg" width="760" height="1647" alt="" /></figure>
+          <figure aria-hidden="true"><img loading="lazy" src="assets/screen-waterbreak.jpg" width="760" height="1647" alt="" /></figure>
+          <figure aria-hidden="true"><img loading="lazy" src="assets/screen-diary.jpg" width="760" height="1647" alt="" /></figure>
+          <figure aria-hidden="true"><img loading="lazy" src="assets/screen-calendar.jpg" width="760" height="1647" alt="" /></figure>
+          <figure aria-hidden="true"><img loading="lazy" src="assets/screen-faq.jpg" width="760" height="1647" alt="" /></figure>
+          <figure aria-hidden="true"><img loading="lazy" src="assets/screen-partner.jpg" width="760" height="1647" alt="" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STEPS ===== -->
+    <section class="steps-sec">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Súper fácil</span>
+          <h2>Cómo funciona la beta</h2>
+          <p>En menos de un minuto y sin compromiso.</p>
+        </div>
+        <div class="steps">
+          <div class="step reveal"><div class="n">1</div><div><h3>Apúntate</h3><p>Déjanos tu nombre y email aquí abajo. Solo necesitas un móvil Android.</p></div></div>
+          <div class="step reveal"><div class="n">2</div><div><h3>Te enviamos el enlace</h3><p>Recibirás el acceso a Kalma en Google Play en tu correo.</p></div></div>
+          <div class="step reveal"><div class="n">3</div><div><h3>Pruébala y cuéntanos</h3><p>Úsala en tu día a día y comparte qué te gustaría mejorar. Tu opinión la construye.</p></div></div>
+        </div>
+        <div style="text-align:center;margin-top:32px">
+          <a class="btn btn-primary" href="#beta">Reservar mi plaza — quedan 12 de 100</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VALOR / VELYCIO ===== -->
+    <section class="value-sec">
+      <div class="wrap">
+        <div class="value-card reveal">
+          <span class="eyebrow">Por qué es gratis para ti</span>
+          <h2>Una app premium. Gratis para las últimas 12 plazas.</h2>
+          <p>Kalma la ha creado <b>Velycio</b>, una agencia de producto digital, con un objetivo claro: ser la app de embarazo más completa del mercado. Saldrá como <b>app de pago</b>… pero las <b>últimas 12 plazas</b> de la beta consiguen <b>acceso gratuito</b> y voz directa en cómo evoluciona, como agradecimiento por ayudarnos a construirla.</p>
+          <ul class="perks">
+            <li>✨ Acceso gratuito mientras las demás pagarán</li>
+            <li>💬 Tu opinión decide qué se mejora</li>
+            <li>🥇 Eres de las primeras, antes que nadie</li>
+          </ul>
+          <a class="btn btn-primary" href="#beta">Quiero una de las 12 plazas</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FORMS ===== -->
+    <section class="form-sec">
+      <div class="wrap form-grid">
+
+        <!-- Android beta -->
+        <div class="form-card android" id="beta">
+          <form id="form-beta" novalidate>
+            <div class="app-badge">
+              <img class="app-icon" src="assets/app-icon.png" alt="Icono de la app Kalma" width="66" height="66" />
+              <div class="app-meta"><strong>Kalma</strong><small>App de embarazo</small></div>
+              <span class="app-plat">📱 Android</span>
+            </div>
+            <h3>Únete a la beta</h3>
+            <p class="lead">🔥 Solo 12 de 100 plazas. Cuando se llenen, se cierra — date prisa.</p>
+
+            <div class="field">
+              <label class="lbl" for="b-name">Tu nombre <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="b-name" name="nombre" placeholder="Mar" autocomplete="given-name" required />
+            </div>
+            <div class="field">
+              <label class="lbl" for="b-email">Tu email <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="b-email" name="email" placeholder="tucorreo@email.com" autocomplete="email" required />
+            </div>
+            <label class="check" for="b-android">
+              <input type="checkbox" id="b-android" name="android" required />
+              <span>Tengo un móvil Android <small>Imprescindible para entrar en la beta</small></span>
+            </label>
+            <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button class="btn btn-primary" type="submit">Quiero mi plaza 🌸</button>
+            <p class="err" id="b-err" role="alert"></p>
+          </form>
+          <div class="success" id="b-ok">
+            <div class="ck" aria-hidden="true">✓</div>
+            <h3>¡Bienvenida a Kalma! 💗</h3>
+            <p>Te hemos apuntado. Pronto recibirás en tu correo el enlace para descargar la app en Android.</p>
+          </div>
+        </div>
+
+        <!-- iOS waitlist -->
+        <div class="form-card ios" id="ios">
+          <form id="form-ios" novalidate>
+            <div class="app-badge">
+              <img class="app-icon" src="assets/app-icon.png" alt="Icono de la app Kalma" width="66" height="66" />
+              <div class="app-meta"><strong>Kalma</strong><small>App de embarazo</small></div>
+              <span class="app-plat">🍎 iOS · pronto</span>
+            </div>
+            <h3>¿Tienes iPhone?</h3>
+            <p class="lead">Avísanos y serás la primera en saberlo cuando Kalma llegue a iOS.</p>
+
+            <div class="field">
+              <label class="lbl" for="i-email">Tu email <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="i-email" name="email" placeholder="tucorreo@email.com" autocomplete="email" required />
+            </div>
+            <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button class="btn btn-primary" type="submit" style="background:linear-gradient(135deg,#6b4451,var(--plum));box-shadow:0 12px 26px rgba(75,46,56,.35)">Avísame para iOS</button>
+            <p class="err" id="i-err" role="alert"></p>
+          </form>
+          <div class="success" id="i-ok">
+            <div class="ck" aria-hidden="true">✓</div>
+            <h3>¡Apuntada! 🍎</h3>
+            <p>Te escribiremos en cuanto Kalma esté disponible en iPhone. Gracias por la paciencia 💗</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="wrap foot">
+      <a class="brand" href="#top" aria-label="Kalma">
+        <img src="assets/logo-rose.svg" alt="" width="30" height="30" />
+        <span>Kalma</span>
+      </a>
+      <div class="foot-links">
+        <a href="#features">Funciones</a>
+        <a href="#beta">Beta Android</a>
+        <a href="#ios">iOS</a>
+        <a href="https://velycio.github.io/kalma-privacy/privacy-policy.html" target="_blank" rel="noopener">Política de privacidad</a>
+        <a href="mailto:info@velycio.com">info@velycio.com</a>
+      </div>
+      <small>© <span id="year">2026</span> Velycio · Hecho con 💗 para acompañarte</small>
+    </div>
+  </footer>
+
+  <!-- Mobile sticky CTA -->
+  <div class="mobile-cta" id="mcta">
+    <a class="btn btn-primary" href="#beta">🔥 Quedan 12 de 100 — únete</a>
+  </div>
+
+  <script>
+    /* === CONFIG: los altas se envían por email a info@velycio.com vía FormSubmit (sin backend) === */
+    const FORM_ENDPOINT = "https://formsubmit.co/ajax/info@velycio.com";
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* === Staggered reveal on scroll === */
+    document.querySelectorAll('.features .feature').forEach((el, i) => el.style.transitionDelay = (i * 70) + 'ms');
+    document.querySelectorAll('.showcase figure').forEach((el, i) => el.style.transitionDelay = ((i % 2) * 90) + 'ms');
+    document.querySelectorAll('.steps .step').forEach((el, i) => el.style.transitionDelay = (i * 110) + 'ms');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    /* === Barra de plazas (88 de 100 reservadas) === */
+    const betaBar = document.getElementById('betaBar');
+    if (betaBar) {
+      const fill = betaBar.querySelector('span');
+      const bObs = new IntersectionObserver((es) => {
+        es.forEach(e => { if (e.isIntersecting) { fill.style.width = '88%'; bObs.disconnect(); } });
+      }, { threshold: 0.5 });
+      bObs.observe(betaBar);
+    }
+
+    /* === Scroll progress bar + hero parallax === */
+    const prog = document.getElementById('progress');
+    const heroVis = document.querySelector('.hero-shot');
+    function onScroll() {
+      const d = document.documentElement;
+      const max = d.scrollHeight - d.clientHeight;
+      if (prog) prog.style.width = (max > 0 ? (d.scrollTop / max) * 100 : 0) + '%';
+      if (!reduce && heroVis && d.scrollTop < window.innerHeight) {
+        heroVis.style.transform = 'translateY(' + (d.scrollTop * 0.07) + 'px)';
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* === Falling petals === */
+    if (!reduce) {
+      const layer = document.getElementById('petals');
+      const N = window.innerWidth < 720 ? 10 : 18;
+      for (let i = 0; i < N; i++) {
+        const p = document.createElement('span');
+        p.className = 'petal';
+        const size = 6 + Math.random() * 12;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = (Math.random() * 100) + 'vw';
+        p.style.animationDuration = (10 + Math.random() * 12) + 's';
+        p.style.animationDelay = (-Math.random() * 16) + 's';
+        p.style.opacity = (0.2 + Math.random() * 0.32).toFixed(2);
+        layer.appendChild(p);
+      }
+    }
+
+    /* === Mobile sticky CTA (aparece tras el hero) === */
+    const mcta = document.getElementById('mcta');
+    const heroSec = document.querySelector('.hero');
+    if (mcta && heroSec) {
+      new IntersectionObserver((es) => {
+        es.forEach(e => mcta.classList.toggle('show', !e.isIntersecting));
+      }, { threshold: 0 }).observe(heroSec);
+    }
+
+    /* === Gallery dots === */
+    const scroller = document.querySelector('.gallery-scroll');
+    const dotsBox = document.getElementById('dots');
+    if (scroller && dotsBox) {
+      const shots = [...scroller.querySelectorAll('.shot')];
+      shots.forEach((s, i) => {
+        const d = document.createElement('span');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        dotsBox.appendChild(d);
+      });
+      const dEls = [...dotsBox.children];
+      scroller.addEventListener('scroll', () => {
+        const max = scroller.scrollWidth - scroller.clientWidth;
+        const idx = max > 0 ? Math.round((scroller.scrollLeft / max) * (shots.length - 1)) : 0;
+        dEls.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }, { passive: true });
+    }
+
+    /* === Form submit handler === */
+    function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+    function handleForm(formId, okId, errId, listName, validate) {
+      const form = document.getElementById(formId);
+      const ok = document.getElementById(okId);
+      const err = document.getElementById(errId);
+
+      form.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        err.style.display = 'none';
+
+        // Honeypot (bots) -> finge éxito silencioso
+        if (form.querySelector('[name="_honey"]').value) { return; }
+
+        const msg = validate(form);
+        if (msg) { err.textContent = msg; err.style.display = 'block'; return; }
+
+        const btn = form.querySelector('button[type="submit"]');
+        const original = btn.textContent;
+        btn.disabled = true; btn.textContent = 'Enviando…';
+
+        const data = new FormData(form);
+        data.append('lista', listName);
+        data.append('origen', 'kalmaapp.pro');
+        data.append('fecha', new Date().toISOString());
+        data.append('_subject', listName === 'beta-android' ? '🌸 Nueva beta tester (Android) — Kalma' : '🍎 Nueva en lista de espera (iOS) — Kalma');
+        data.append('_captcha', 'false');
+        data.append('_template', 'table');
+
+        try {
+          const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          if (!res.ok) throw new Error('http ' + res.status);
+          form.classList.add('form-hidden');
+          ok.classList.add('show');
+          ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (e) {
+          btn.disabled = false; btn.textContent = original;
+          err.innerHTML = 'No hemos podido enviarlo. Escríbenos a <a href="mailto:info@velycio.com" style="color:var(--rose-deep);text-decoration:underline">info@velycio.com</a> y te apuntamos.';
+          err.style.display = 'block';
+        }
+      });
+    }
+
+    handleForm('form-beta', 'b-ok', 'b-err', 'beta-android', (form) => {
+      if (!form.nombre.value.trim()) return 'Por favor, escribe tu nombre.';
+      if (!isEmail(form.email.value.trim())) return 'Revisa tu email, parece que falta algo.';
+      if (!form.android.checked) return 'Necesitas un móvil Android para entrar en la beta. Marca la casilla 🙂';
+      return null;
+    });
+
+    handleForm('form-ios', 'i-ok', 'i-err', 'lista-espera-ios', (form) => {
+      if (!isEmail(form.email.value.trim())) return 'Revisa tu email, parece que falta algo.';
+      return null;
+    });
+  </script>
+</body>
+</html>

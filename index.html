@@ -638,8 +638,25 @@
   </div>
 
   <script>
-    /* === CONFIG: los altas se envían por email a info@velycio.com vía FormSubmit (sin backend) === */
+    /* === CONFIG: cada alta se guarda en Supabase (captura fiable) + email best-effort vía FormSubmit === */
     const FORM_ENDPOINT = "https://formsubmit.co/ajax/info@kalmaapp.pro";
+    const SUPABASE_URL = "https://ubtppgcrcvuvocitqxuy.supabase.co";
+    const SUPABASE_ANON = "sb_publishable_xPy1OPvnG0ItIAJMItw62g_Z03kfvsp";
+
+    // Inserta el alta en la tabla beta_signups (clave anon pública; RLS solo permite INSERT)
+    async function saveSignup(record) {
+      const res = await fetch(SUPABASE_URL + "/rest/v1/beta_signups", {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_ANON,
+          "Authorization": "Bearer " + SUPABASE_ANON,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal",
+        },
+        body: JSON.stringify(record),
+      });
+      if (!res.ok) throw new Error("supabase " + res.status);
+    }
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -753,13 +770,27 @@
         data.append('_captcha', 'false');
         data.append('_template', 'table');
 
+        const record = {
+          name: form.nombre ? form.nombre.value.trim() : '',
+          email: form.email.value.trim(),
+          platform: listName === 'beta-android' ? 'android' : 'ios',
+          source: 'kalmaapp.pro',
+        };
+
+        let captured = false;
+        // 1) Supabase — captura fiable (aunque el email falle, el alta no se pierde)
+        try { await saveSignup(record); captured = true; } catch (e) {}
+        // 2) FormSubmit — email de aviso, best-effort
         try {
           const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-          if (!res.ok) throw new Error('http ' + res.status);
+          if (res.ok) captured = true;
+        } catch (e) {}
+
+        if (captured) {
           form.classList.add('form-hidden');
           ok.classList.add('show');
           ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } catch (e) {
+        } else {
           btn.disabled = false; btn.textContent = original;
           err.innerHTML = 'No hemos podido enviarlo. Escríbenos a <a href="mailto:info@velycio.com" style="color:var(--rose-deep);text-decoration:underline">info@velycio.com</a> y te apuntamos.';
           err.style.display = 'block';

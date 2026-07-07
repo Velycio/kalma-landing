@@ -301,6 +301,14 @@
     .check input { width: 22px; height: 22px; min-width: 22px; margin-top: 2px; accent-color: var(--rose); cursor: pointer; }
     .check span { font-weight: 700; font-size: 15px; }
     .check span small { display: block; font-weight: 600; color: var(--muted); font-size: 13px; }
+    .perk-hi {
+      display: flex; gap: 11px; align-items: flex-start;
+      background: linear-gradient(135deg, rgba(212,95,120,0.1), rgba(197,113,138,0.16));
+      border: 1.5px solid var(--pink-200); border-radius: var(--radius-sm);
+      padding: 14px 16px; margin-bottom: 18px; font-size: 14.5px; line-height: 1.45;
+    }
+    .perk-hi .gift { font-size: 22px; line-height: 1; flex: 0 0 auto; }
+    .perk-hi b { color: var(--rose-deep); }
     .form-card .btn { width: 100%; }
     .err { color: var(--rose-deep); font-weight: 800; font-size: 14px; margin-top: 10px; display: none; }
     .hp { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
@@ -420,7 +428,7 @@
           </div>
           <span class="pill"><span class="pulse" aria-hidden="true"></span> Cupo completo · Plazas extra para seguidores</span>
           <h1>Tu <em>compañera</em> de embarazo</h1>
-          <p class="sub">Semana a semana, desde el test hasta el parto. La beta se llenó, pero guardamos <b>unas plazas para quienes nos seguís desde el principio.</b> Solo hasta el 18 de julio.</p>
+          <p class="sub">Semana a semana, desde el test hasta el parto. La beta se llenó, pero guardamos unas plazas para nuestros seguidores — y quien entra ahora lo tendrá <b>gratis para siempre.</b> Solo hasta el 18 de julio.</p>
           <div class="cta-row">
             <a class="btn btn-primary" href="#aviso">Quiero mi plaza en la beta</a>
           </div>
@@ -452,7 +460,8 @@
       <div class="beta-card reveal">
         <p class="fire">🎁 Ya hemos cubierto el cupo de la beta… pero <b>no queremos que te quedes fuera</b>.</p>
         <div class="beta-bar" aria-hidden="true"><span id="beta-fill"></span></div>
-        <small>Reservamos unas <b>plazas extra</b> para quienes nos seguís desde el principio de esta aventura 💗 &nbsp;·&nbsp; iPhone y Android</small>
+        <small>Reservamos unas <b>plazas extra</b> para quienes nos seguís desde el principio 💗 &nbsp;·&nbsp; iPhone y Android</small>
+        <small style="font-size:15px">🎁 Y quien entra ahora tendrá <b>gratis para siempre</b> lo que después será de pago</small>
         <small id="beta-cd" style="font-size:15px">⏳ Solo hasta el <b>18 de julio</b></small>
         <a class="btn" href="#aviso">Quiero mi plaza</a>
       </div>
@@ -535,7 +544,7 @@
           <ul class="perks">
             <li>🌸 Todo lo que vives en el embarazo, en una sola app</li>
             <li>💞 Compartida con tu pareja en tiempo real</li>
-            <li>🎁 Acceso gratuito a la beta, solo para seguidores</li>
+            <li>🎁 Gratis para siempre: conserva sin pagar lo que luego será de pago</li>
           </ul>
           <a class="btn btn-primary" href="#aviso">Quiero mi plaza</a>
         </div>
@@ -554,6 +563,11 @@
             </div>
             <h3>Reserva tu plaza en la beta</h3>
             <p class="lead">El cupo está completo, pero guardamos unas plazas para nuestros seguidores. Déjanos tus datos y te enviamos el acceso (TestFlight o Android). Solo hasta el <b>18 de julio</b>.</p>
+
+            <div class="perk-hi">
+              <span class="gift" aria-hidden="true">🎁</span>
+              <span><b>Gratis para siempre.</b> Quien entra ahora conserva sin pagar todas las funciones que más adelante serán de pago. Es nuestra forma de daros las gracias.</span>
+            </div>
 
             <div class="field">
               <label class="lbl" for="w-name">Tu nombre <span class="req" aria-hidden="true">*</span></label>

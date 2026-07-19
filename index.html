@@ -220,6 +220,7 @@
     /* ===== Features ===== */
     .features { display: grid; grid-template-columns: 1fr; gap: 16px; }
     .feature {
+      display: block; text-decoration: none; color: inherit;
       background: rgba(255,255,255,0.9); border: 1px solid rgba(168,87,111,0.08);
       border-radius: var(--radius); padding: 26px 24px; box-shadow: var(--shadow-sm);
       transition: transform .25s var(--ease), box-shadow .25s var(--ease);
@@ -474,12 +475,15 @@
           <p>Las herramientas que de verdad usas durante el embarazo, sin complicaciones ni lenguaje de hospital.</p>
         </div>
         <div class="features">
-          <div class="feature reveal"><div class="ico" aria-hidden="true">⏱️</div><h3>Timer de contracciones</h3><p>Registra cada contracción y Kalma detecta la regla 5-1-1 para avisarte cuándo ir al hospital.</p></div>
-          <div class="feature reveal"><div class="ico" aria-hidden="true">👣</div><h3>Contador de patadas</h3><p>Lleva la cuenta de los movimientos de tu bebé desde la semana 28, fácil y rápido.</p></div>
-          <div class="feature reveal"><div class="ico" aria-hidden="true">📖</div><h3>Diario de embarazo</h3><p>Guarda fotos, ecografías y momentos. El álbum que conservarás para siempre.</p></div>
-          <div class="feature reveal"><div class="ico" aria-hidden="true">🤰</div><h3>Bebé semana a semana</h3><p>Su tamaño, su peso y cada avance. Una nueva sorpresa cada semana.</p></div>
-          <div class="feature reveal"><div class="ico" aria-hidden="true">🧳</div><h3>Bolsa del hospital</h3><p>Checklist para que no se te olvide nada cuando llegue el momento.</p></div>
-          <div class="feature reveal"><div class="ico" aria-hidden="true">💞</div><h3>Sincronizada con tu pareja</h3><p>Comparte tu embarazo al instante: contracciones, avances y recuerdos, en tiempo real.</p></div>
+          <a class="feature reveal" href="/funciones/contador-de-contracciones.html"><div class="ico" aria-hidden="true">⏱️</div><h3>Contador de contracciones</h3><p>Registra cada contracción y Kalma detecta la regla 5-1-1 para avisarte cuándo ir al hospital.</p></a>
+          <a class="feature reveal" href="/funciones/contador-de-patadas.html"><div class="ico" aria-hidden="true">👣</div><h3>Contador de patadas</h3><p>Lleva la cuenta de los movimientos de tu bebé desde la semana 28, fácil y rápido.</p></a>
+          <a class="feature reveal" href="/funciones/diario-de-embarazo.html"><div class="ico" aria-hidden="true">📖</div><h3>Diario de embarazo</h3><p>Guarda fotos, ecografías y momentos. El álbum que conservarás para siempre.</p></a>
+          <a class="feature reveal" href="/funciones/bebe-semana-a-semana.html"><div class="ico" aria-hidden="true">🤰</div><h3>Bebé semana a semana</h3><p>Su tamaño, su peso y cada avance. Una nueva sorpresa cada semana.</p></a>
+          <a class="feature reveal" href="/funciones/bolsa-del-hospital.html"><div class="ico" aria-hidden="true">🧳</div><h3>Bolsa del hospital</h3><p>Checklist para que no se te olvide nada cuando llegue el momento.</p></a>
+          <a class="feature reveal" href="/funciones/app-embarazo-pareja.html"><div class="ico" aria-hidden="true">💞</div><h3>Sincronizada con tu pareja</h3><p>Comparte tu embarazo al instante: contracciones, avances y recuerdos, en tiempo real.</p></a>
+        </div>
+        <div style="text-align:center;margin-top:32px">
+          <a class="btn btn-secondary" href="/funciones/">Ver todas las funciones →</a>
         </div>
       </div>
     </section>
@@ -603,7 +607,9 @@
         <span>Kalma</span>
       </a>
       <div class="foot-links">
-        <a href="#features">Funciones</a>
+        <a href="/funciones/">Funciones</a>
+        <a href="/funciones/contador-de-contracciones.html">Contracciones</a>
+        <a href="/blog/">Blog</a>
         <a href="#aviso">Lanzamiento</a>
         <a href="https://velycio.github.io/kalma-privacy/privacy-policy.html" target="_blank" rel="noopener">Política de privacidad</a>
         <a href="mailto:info@velycio.com">info@velycio.com</a>

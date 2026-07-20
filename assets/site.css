@@ -177,6 +177,8 @@ footer{background:var(--plum);color:#f2e4e8;padding:44px 0 36px;margin-top:40px}
 .article-body h2{margin-top:40px}
 .pull{border:0;margin:30px 0;padding:6px 0 6px 24px;border-left:4px solid var(--rose);font-family:'Fraunces',serif;font-style:italic;font-size:1.35rem;line-height:1.4;color:var(--rose-deep)}
 .pull em{font-style:normal;color:var(--plum)}
+.signature{font-family:'Fraunces',serif;font-style:italic;font-size:1.2rem;color:var(--rose-deep);margin-top:24px}
+.about-story blockquote.pull{font-size:1.45rem}
 .feat-callout{display:flex;gap:16px;align-items:center;background:linear-gradient(135deg,var(--pink-50),var(--pink-100));border:1px solid var(--pink-200);border-radius:var(--radius);padding:20px 22px;margin:32px 0;text-decoration:none;color:var(--plum);box-shadow:var(--shadow-sm);transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
 .feat-callout:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
 .feat-callout-ico{flex:0 0 auto;width:52px;height:52px;border-radius:15px;display:grid;place-items:center;background:#fff;color:var(--rose-deep);box-shadow:var(--shadow-sm)}

@@ -38,6 +38,7 @@ function header(active) {
   <nav class="nav-links" aria-label="Principal">
     ${link("/funciones/", "Funciones", "func")}
     ${link("/blog/", "Blog", "blog")}
+    ${link("/sobre-nosotros/", "Nosotros", "about")}
   </nav>
   <a class="btn btn-primary" href="/#aviso">Avísame del lanzamiento</a>
 </div></header>`;
@@ -60,7 +61,7 @@ const FOOTER = `<footer><div class="wrap">
     <div>
       <h4>Recursos</h4>
       <a href="/blog/">Blog</a>
-      <a href="/#features">Sobre la app</a>
+      <a href="/sobre-nosotros/">Sobre nosotros</a>
       <a href="/privacidad/">Política de privacidad</a>
       <a href="mailto:${SITE.email}">${SITE.email}</a>
     </div>
@@ -1144,6 +1145,52 @@ for (const p of POSTS) {
   );
 }
 
+/* ---------- Página Sobre nosotros ---------- */
+{
+  const values = [
+    { ic: "shield", t: "Información de confianza", d: "Clara, cálida y actualizada. Nada de material anticuado ni lenguaje de hospital." },
+    { ic: "star", t: "Todo en una app", d: "Las funciones que de verdad necesitas, reunidas y bien hechas. Sin anuncios." },
+    { ic: "hearts", t: "En pareja", d: "Porque el embarazo se vive de dos. Tu pareja lo vive contigo, en tiempo real." },
+  ];
+  const valueCards = values
+    .map((v) => `<div class="card reveal"><div class="ico" aria-hidden="true">${icon(v.ic)}</div><h3>${v.t}</h3><p>${v.d}</p></div>`)
+    .join("");
+  const body = `
+<div class="wrap narrow">
+  <p class="crumb"><a href="/">Inicio</a> › Sobre nosotros</p>
+  <section class="phero reveal">
+    <span class="eyebrow">Nuestra historia</span>
+    <h1>Kalma nació <em>esperando a Inés</em></h1>
+    <p class="lead">La historia de por qué existe Kalma — contada por quien la vivió de primera mano.</p>
+  </section>
+  <section class="prose article-body about-story reveal">
+    <p>Cuando supe que iba a ser padre sentí lo que sienten tantas familias: una ilusión enorme… y un montón de preguntas. Durante esos nueve meses viví muchísimos cambios y recibí muchísima información. El problema es que buena parte de esa información era confusa, contradictoria o simplemente estaba <strong>desactualizada</strong>.</p>
+    <p>El punto de inflexión llegó con las <strong>clases preparto</strong>. Mi mujer me llevó casi de la mano y allí, por fin, alguien nos explicó el procedimiento y nos dio información útil para los momentos que de verdad importan. Pero también descubrí algo: gran parte del material oficial estaba anticuado. Había información valiosísima… <strong>comunicada de una forma que no llegaba</strong>.</p>
+    <blockquote class="pull">Empecé a apuntármelo todo. Quería algo que me ayudara a recordarlo y que me acompañara durante el embarazo y, sobre todo, el día del parto.</blockquote>
+    <p>Busqué apps que ya lo hicieran. Y me llevé una sorpresa: casi ninguna hacía más de una cosa, muchas estaban descuidadas y llenas de anuncios… y <strong>ninguna dejaba vivir el embarazo en pareja</strong>. La pareja siempre se quedaba fuera.</p>
+    <p>Entonces decidí crear <strong>Kalma</strong>: reunir en una sola app las funciones que de verdad necesitas —contracciones, patadas, diario, bebé semana a semana, bolsa del hospital, respiración— con información clara y cálida, <strong>sin anuncios y sin ruido</strong>. Y con algo que echaba de menos en todas las demás: que tu pareja lo viva contigo, en tiempo real.</p>
+    <p><em>Inés ya nació. Kalma se queda para acompañar a otras familias en el camino más importante de sus vidas.</em></p>
+    <p class="signature">— Carlos, fundador de Kalma y Velycio</p>
+  </section>
+  <section class="prose">
+    <h2>Por qué Kalma es diferente</h2>
+    <div class="grid cols-3">${valueCards}</div>
+  </section>
+  ${ctaBand("Acompáñanos desde el principio", "Kalma está en beta cerrada. Déjanos tu email y te avisamos en cuanto puedas descargarla.")}
+</div>`;
+  write(
+    "sobre-nosotros/index.html",
+    layout({
+      title: "Sobre nosotros — La historia de Kalma",
+      desc: "Por qué nació Kalma: la historia real de un padre que no encontró una app de embarazo clara, completa y para vivir en pareja, y decidió crearla.",
+      canonical: SITE.domain + "/sobre-nosotros/",
+      active: "about",
+      jsonld: [breadcrumb([{ name: "Inicio", path: "/" }, { name: "Sobre nosotros", path: "/sobre-nosotros/" }]), { "@context": "https://schema.org", "@type": "AboutPage", name: "Sobre nosotros — Kalma", url: SITE.domain + "/sobre-nosotros/", inLanguage: "es-ES", publisher: orgLD }],
+      body,
+    })
+  );
+}
+
 /* ---------- Página de Privacidad ---------- */
 {
   const pEmail = "info@kalmaapp.pro"; // email de contacto en la política de privacidad
@@ -1230,6 +1277,7 @@ for (const p of POSTS) {
     { loc: "/", pri: "1.0" },
     { loc: "/funciones/", pri: "0.8" },
     { loc: "/blog/", pri: "0.7" },
+    { loc: "/sobre-nosotros/", pri: "0.6" },
     { loc: "/privacidad/", pri: "0.3" },
     ...FEATURES.map((f) => ({ loc: `/funciones/${f.slug}.html`, pri: f.slug === "contador-de-contracciones" ? "0.9" : "0.7" })),
     ...POSTS.map((p) => ({ loc: `/blog/${p.slug}.html`, pri: "0.6", lastmod: p.dateISO })),

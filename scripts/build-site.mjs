@@ -1225,6 +1225,7 @@ for (const p of POSTS) {
     { loc: "/", pri: "1.0" },
     { loc: "/funciones/", pri: "0.8" },
     { loc: "/blog/", pri: "0.7" },
+    { loc: "/privacidad/", pri: "0.3" },
     ...FEATURES.map((f) => ({ loc: `/funciones/${f.slug}.html`, pri: f.slug === "contador-de-contracciones" ? "0.9" : "0.7" })),
     ...POSTS.map((p) => ({ loc: `/blog/${p.slug}.html`, pri: "0.6", lastmod: p.dateISO })),
   ];

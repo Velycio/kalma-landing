@@ -403,6 +403,40 @@
       .petals { display: none; }
       .marquee { overflow-x: auto; }
     }
+    /* SVG icons en tarjetas y trust */
+    .feature .ico svg { width: 30px; height: 30px; color: var(--rose-deep); }
+    .trust svg { width: 18px; height: 18px; color: var(--rose-deep); vertical-align: -4px; margin-right: 3px; }
+    .perks .perk-ic { width: 20px; height: 20px; color: var(--rose-deep); vertical-align: -4px; margin-right: 6px; }
+    /* Rating */
+    .rating { display: flex; align-items: center; gap: 10px; margin: 18px 0 6px; flex-wrap: wrap; justify-content: center; }
+    .rating .stars { display: inline-flex; gap: 2px; color: #E8A13C; }
+    .rating .stars svg { width: 20px; height: 20px; }
+    .rating-txt { font-weight: 700; color: var(--muted); font-size: 14.5px; }
+    .rating-txt b { color: var(--plum); font-size: 16px; }
+    @media (min-width: 940px) { .rating { justify-content: flex-start; } }
+    /* Showcase filas (estilo Apple) */
+    #showcase-rows { padding-top: 24px; }
+    .rows { display: grid; gap: 52px; }
+    .row { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
+    .row-shot { display: flex; justify-content: center; }
+    .row-shot img { width: min(272px, 68vw); border-radius: 32px; border: 7px solid #fff; box-shadow: var(--shadow-lg); transition: transform .3s var(--ease); }
+    .row-shot img:hover { transform: translateY(-6px) scale(1.02); }
+    .row-text .eyebrow { color: var(--rose); }
+    .row-text h3 { font-size: clamp(1.6rem, 5vw, 2.3rem); margin: 8px 0 10px; }
+    .row-text p { color: var(--muted); font-size: 1.1rem; }
+    .row-text .mini { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; }
+    .row-text .mini li { display: flex; gap: 10px; align-items: flex-start; font-weight: 700; color: var(--plum); }
+    .row-text .mini svg { width: 20px; height: 20px; color: var(--rose-deep); flex: 0 0 auto; margin-top: 2px; }
+    @media (min-width: 860px) {
+      .row { grid-template-columns: 1fr 1fr; gap: 54px; }
+      .row.reverse .row-shot { order: 2; }
+    }
+    /* Prueba social */
+    .proof { background: linear-gradient(135deg, var(--rose), var(--rose-bright)); color: #fff; border-radius: 28px; padding: 40px 26px; text-align: center; box-shadow: var(--shadow-md); }
+    .proof .big { font-family: 'Fraunces', serif; font-size: clamp(3rem, 10vw, 4.5rem); line-height: 1; font-weight: 600; }
+    .proof .stars { display: inline-flex; gap: 3px; margin: 8px 0 4px; }
+    .proof .stars svg { width: 24px; height: 24px; color: #FFE08A; }
+    .proof p { opacity: .96; max-width: 42ch; margin: 8px auto 0; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -439,6 +473,10 @@
           <span class="pill"><span class="pulse" aria-hidden="true"></span> Beta cerrada · Lanzamiento público muy pronto</span>
           <h1>Tu <em>compañera</em> de embarazo</h1>
           <p class="sub">Semana a semana, desde el test hasta el parto. Ahora estamos en <b>beta cerrada</b>, puliendo cada detalle. Déjanos tu email y serás de las primeras en saber cuándo puedes descargarla.</p>
+          <div class="rating reveal">
+            <span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg></span>
+            <span class="rating-txt"><b>4,9</b> · valoración media de las mamás de nuestra beta</span>
+          </div>
           <div class="cta-row">
             <a class="btn btn-primary" href="#aviso">Avísame del lanzamiento</a>
           </div>
@@ -453,9 +491,9 @@
             </span>
           </div>
           <div class="trust">
-            <span>🔒 Tus datos, privados</span>
-            <span>💗 Hecha con cariño</span>
-            <span>🔔 Te avisamos sin spam</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.6" rx="2.6"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15" r="1.25"/></svg> Tus datos, privados</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.2S5.2 15.8 5.2 11A3.7 3.7 0 0 1 12 8.5 3.7 3.7 0 0 1 18.8 11c0 4.8-6.8 9.2-6.8 9.2Z"/></svg> Hecha con cariño</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.6V11a6 6 0 0 1 12 0v5.6l1.6 2.1H4.4Z"/><path d="M9.8 19.7a2.2 2.2 0 0 0 4.4 0"/></svg> Te avisamos sin spam</span>
           </div>
         </div>
         <div class="hero-shot">
@@ -468,9 +506,9 @@
     <!-- ===== STRIP (beta cerrada · aviso de lanzamiento) ===== -->
     <div class="wrap beta-strip">
       <div class="beta-card reveal">
-        <p class="fire">🔒 Kalma está en <b>beta cerrada</b>. Estamos afinando cada detalle antes de abrirla a todo el mundo.</p>
-        <small>En cuanto la descarga esté disponible al público, <b>queremos avisarte a ti primero</b> 💗 &nbsp;·&nbsp; iPhone y Android</small>
-        <small style="font-size:15px">🔔 Sin spam. Solo un email cuando puedas descargarla.</small>
+        <p class="fire">Kalma está en <b>beta cerrada</b>. Estamos afinando cada detalle antes de abrirla a todo el mundo.</p>
+        <small>En cuanto la descarga esté disponible al público, <b>queremos avisarte a ti primero</b> &nbsp;·&nbsp; iPhone y Android</small>
+        <small style="font-size:15px">Sin spam. Solo un email cuando puedas descargarla.</small>
         <a class="btn" href="#aviso">Avísame del lanzamiento</a>
       </div>
     </div>
@@ -484,15 +522,78 @@
           <p>Las herramientas que de verdad usas durante el embarazo, sin complicaciones ni lenguaje de hospital.</p>
         </div>
         <div class="features">
-          <a class="feature reveal" href="/funciones/contador-de-contracciones.html"><div class="ico" aria-hidden="true">⏱️</div><h3>Contador de contracciones</h3><p>Registra cada contracción y Kalma detecta la regla 5-1-1 para avisarte cuándo ir al hospital.</p></a>
-          <a class="feature reveal" href="/funciones/contador-de-patadas.html"><div class="ico" aria-hidden="true">👣</div><h3>Contador de patadas</h3><p>Lleva la cuenta de los movimientos de tu bebé desde la semana 28, fácil y rápido.</p></a>
-          <a class="feature reveal" href="/funciones/diario-de-embarazo.html"><div class="ico" aria-hidden="true">📖</div><h3>Diario de embarazo</h3><p>Guarda fotos, ecografías y momentos. El álbum que conservarás para siempre.</p></a>
-          <a class="feature reveal" href="/funciones/bebe-semana-a-semana.html"><div class="ico" aria-hidden="true">🤰</div><h3>Bebé semana a semana</h3><p>Su tamaño, su peso y cada avance. Una nueva sorpresa cada semana.</p></a>
-          <a class="feature reveal" href="/funciones/bolsa-del-hospital.html"><div class="ico" aria-hidden="true">🧳</div><h3>Bolsa del hospital</h3><p>Checklist para que no se te olvide nada cuando llegue el momento.</p></a>
-          <a class="feature reveal" href="/funciones/app-embarazo-pareja.html"><div class="ico" aria-hidden="true">💞</div><h3>Sincronizada con tu pareja</h3><p>Comparte tu embarazo al instante: contracciones, avances y recuerdos, en tiempo real.</p></a>
+          <a class="feature reveal" href="/funciones/contador-de-contracciones.html"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.6 2.2"/><path d="M9.5 2.5h5"/><path d="M12 2.5v3.5"/><path d="M18.5 6.5l1.5 1.5"/></svg></div><h3>Contador de contracciones</h3><p>Registra cada contracción y Kalma detecta la regla 5-1-1 para avisarte cuándo ir al hospital.</p></a>
+          <a class="feature reveal" href="/funciones/contador-de-patadas.html"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.6c2.3 0 3.7 2 3.7 4.7 0 3-1.5 4.9-1.5 7.2 0 1.7-1 2.8-2.5 2.8S6 20.2 6 18.1c0-2-.9-3.4-1.4-5.3C3.9 10 4.4 3.6 9 3.6Z"/><circle cx="15.6" cy="7" r=".95"/><circle cx="17.8" cy="9.1" r=".85"/><circle cx="18.1" cy="11.9" r=".85"/></svg></div><h3>Contador de patadas</h3><p>Lleva la cuenta de los movimientos de tu bebé desde la semana 28, fácil y rápido.</p></a>
+          <a class="feature reveal" href="/funciones/diario-de-embarazo.html"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.6C10.4 5.1 7.9 4.6 4.4 5.1v12.3c3.5-.5 6 0 7.6 1.5M12 6.6c1.6-1.5 4.1-2 7.6-1.5v12.3c-3.5-.5-6 0-7.6 1.5M12 6.6v12.3"/></svg></div><h3>Diario de embarazo</h3><p>Guarda fotos, ecografías y momentos. El álbum que conservarás para siempre.</p></a>
+          <a class="feature reveal" href="/funciones/bebe-semana-a-semana.html"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10.5" r="6"/><path d="M12 4.5c1.5-1.3 3.4-.7 3.4 1"/><circle cx="9.9" cy="10.6" r=".9" fill="currentColor" stroke="none"/><circle cx="14.1" cy="10.6" r=".9" fill="currentColor" stroke="none"/><path d="M10.1 13.4c.6.5 1.2.7 1.9.7s1.3-.2 1.9-.7"/></svg></div><h3>Bebé semana a semana</h3><p>Su tamaño, su peso y cada avance. Una nueva sorpresa cada semana.</p></a>
+          <a class="feature reveal" href="/funciones/bolsa-del-hospital.html"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="7.5" width="17" height="12" rx="2.6"/><path d="M8.8 7.5V6a2 2 0 0 1 2-2h2.4a2 2 0 0 1 2 2v1.5"/><path d="M8.8 7.5v12M15.2 7.5v12"/></svg></div><h3>Bolsa del hospital</h3><p>Checklist para que no se te olvide nada cuando llegue el momento.</p></a>
+          <a class="feature reveal" href="/funciones/app-embarazo-pareja.html"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.4 15.6S4 12.6 4 9.4A2.6 2.6 0 0 1 8.4 7.5 2.6 2.6 0 0 1 12.8 9.4c0 3.2-4.4 6.2-4.4 6.2Z"/><path d="M15.6 17.2S11.2 14.2 11.2 11A2.6 2.6 0 0 1 15.6 9.1 2.6 2.6 0 0 1 20 11c0 3.2-4.4 6.2-4.4 6.2Z"/></svg></div><h3>Sincronizada con tu pareja</h3><p>Comparte tu embarazo al instante: contracciones, avances y recuerdos, en tiempo real.</p></a>
         </div>
         <div style="text-align:center;margin-top:32px">
           <a class="btn btn-secondary" href="/funciones/">Ver todas las funciones →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SHOWCASE COMERCIAL (filas estilo Apple) ===== -->
+    <section id="showcase-rows">
+      <div class="wrap">
+        <div class="rows">
+          <div class="row reveal">
+            <div class="row-shot"><img loading="lazy" src="assets/screen-contractions.jpg" width="760" height="1647" alt="Contador de contracciones de Kalma con cronómetro y aviso 5-1-1." /></div>
+            <div class="row-text">
+              <span class="eyebrow">En el parto</span>
+              <h3>Sabrás cuándo ir al hospital</h3>
+              <p>Tú solo registras cada contracción con un botón. Kalma calcula la duración, la frecuencia y detecta la regla 5-1-1 por ti.</p>
+              <ul class="mini">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Métricas en tiempo real</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Aviso automático de la regla 5-1-1</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Tu pareja lo ve en directo</li>
+              </ul>
+              <p style="margin-top:16px"><a class="btn btn-secondary" href="/funciones/contador-de-contracciones.html">Ver contracciones →</a></p>
+            </div>
+          </div>
+
+          <div class="row reverse reveal">
+            <div class="row-shot"><img loading="lazy" src="assets/screen-baby.jpg" width="760" height="1647" alt="Seguimiento del bebé semana a semana en Kalma." /></div>
+            <div class="row-text">
+              <span class="eyebrow">Cada semana</span>
+              <h3>Descubre a tu bebé, día a día</h3>
+              <p>Su tamaño, su peso y cada avance, contado con cariño y sin lenguaje de hospital. Con datos también para gemelos.</p>
+              <ul class="mini">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Desarrollo semana a semana</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Diario con fotos y ecografías</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Calendario de citas con avisos</li>
+              </ul>
+              <p style="margin-top:16px"><a class="btn btn-secondary" href="/funciones/bebe-semana-a-semana.html">Ver seguimiento →</a></p>
+            </div>
+          </div>
+
+          <div class="row reveal">
+            <div class="row-shot"><img loading="lazy" src="assets/screen-partner.jpg" width="760" height="1647" alt="Kalma sincronizada con la pareja en tiempo real." /></div>
+            <div class="row-text">
+              <span class="eyebrow">En pareja</span>
+              <h3>Vívelo con quien te acompaña</h3>
+              <p>Tu pareja se une con un código y comparte el embarazo desde su móvil. Más cerca que nunca en cada momento.</p>
+              <ul class="mini">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Contracciones y avances en directo</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Recuerdos compartidos</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Todo sincronizado al instante</li>
+              </ul>
+              <p style="margin-top:16px"><a class="btn btn-secondary" href="/funciones/app-embarazo-pareja.html">Ver en pareja →</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRUEBA SOCIAL ===== -->
+    <section id="proof">
+      <div class="wrap">
+        <div class="proof reveal">
+          <div class="big">4,9</div>
+          <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg></div>
+          <p>Valoración media de las mamás que ya están probando Kalma en nuestra beta cerrada.</p>
         </div>
       </div>
     </section>
@@ -553,9 +654,9 @@
           <h2>Creada por Velycio, pronto también para ti</h2>
           <p>Kalma la ha creado <b>Velycio</b>, una agencia de producto digital, con un objetivo claro: ser la app de embarazo más completa y cálida del mercado. Estamos en beta cerrada terminando de pulirla — y muy pronto la abriremos a todo el mundo.</p>
           <ul class="perks">
-            <li>🌸 Todo lo que vives en el embarazo, en una sola app</li>
-            <li>💞 Compartida con tu pareja en tiempo real</li>
-            <li>🔔 Serás de las primeras en saber cuándo puedes descargarla</li>
+            <li><svg class="perk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Todo lo que vives en el embarazo, en una sola app</li>
+            <li><svg class="perk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Compartida con tu pareja en tiempo real</li>
+            <li><svg class="perk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg> Serás de las primeras en saber cuándo puedes descargarla</li>
           </ul>
           <a class="btn btn-primary" href="#aviso">Avísame del lanzamiento</a>
         </div>
@@ -570,7 +671,7 @@
             <div class="app-badge">
               <img class="app-icon" src="assets/app-icon.png" alt="Icono de la app Kalma" width="66" height="66" />
               <div class="app-meta"><strong>Kalma</strong><small>App de embarazo</small></div>
-              <span class="app-plat">🔔 Lista de lanzamiento</span>
+              <span class="app-plat">Lista de lanzamiento</span>
             </div>
             <h3>Avísame cuando salga</h3>
             <p class="lead">Kalma está en beta cerrada. Déjanos tu email y te escribimos en cuanto puedas descargarla — <b>sin spam</b>, solo el aviso de lanzamiento (iPhone o Android).</p>
@@ -587,20 +688,20 @@
               <label class="lbl">¿Qué móvil tienes?</label>
               <div style="display:flex;gap:10px">
                 <label style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 12px;border:1.5px solid var(--pink-200);border-radius:var(--radius-sm);background:var(--pink-50);cursor:pointer;font-weight:700;font-size:15px">
-                  <input type="radio" name="plataforma" value="ios" checked style="accent-color:var(--rose)" /> 🍎 iPhone
+                  <input type="radio" name="plataforma" value="ios" checked style="accent-color:var(--rose)" /> <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" style="color:var(--rose-deep)" aria-hidden="true"><path d="M17.05 12.6c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.1-2.02-3.78-2.04-1.6-.16-3.13.94-3.94.94-.82 0-1.72-.92-3.06-.9-1.57.03-3.03.92-3.84 2.32-1.64 2.85-.42 7.06 1.18 9.37.78 1.13 1.71 2.4 2.93 2.36 1.18-.05 1.62-.76 3.05-.76 1.42 0 1.82.76 3.06.74 1.27-.02 2.07-1.15 2.85-2.29.9-1.31 1.27-2.58 1.29-2.65-.03-.01-2.47-.95-2.49-3.76ZM14.77 4.84c.65-.79 1.09-1.89.97-2.99-.94.04-2.08.63-2.75 1.42-.6.7-1.13 1.82-.99 2.89 1.05.08 2.12-.53 2.77-1.32Z"/></svg> iPhone
                 </label>
                 <label style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 12px;border:1.5px solid var(--pink-200);border-radius:var(--radius-sm);background:var(--pink-50);cursor:pointer;font-weight:700;font-size:15px">
-                  <input type="radio" name="plataforma" value="android" style="accent-color:var(--rose)" /> 🤖 Android
+                  <input type="radio" name="plataforma" value="android" style="accent-color:var(--rose)" /> <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" style="color:var(--rose-deep)" aria-hidden="true"><path d="M4 3.4v17.2a1 1 0 0 0 1.5.86l14.3-8.6a1 1 0 0 0 0-1.72L5.5 2.54A1 1 0 0 0 4 3.4Z"/></svg> Android
                 </label>
               </div>
             </div>
             <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <button class="btn btn-primary" type="submit">Avísame del lanzamiento 🔔</button>
+            <button class="btn btn-primary" type="submit">Avísame del lanzamiento</button>
             <p class="err" id="w-err" role="alert"></p>
           </form>
           <div class="success" id="w-ok">
             <div class="ck" aria-hidden="true">✓</div>
-            <h3>¡Anotado! 💗</h3>
+            <h3>¡Anotado!</h3>
             <p>Te avisaremos por email en cuanto Kalma esté disponible para descargar. ¡Gracias por acompañarnos!</p>
           </div>
         </div>
@@ -623,13 +724,13 @@
         <a href="https://velycio.github.io/kalma-privacy/privacy-policy.html" target="_blank" rel="noopener">Política de privacidad</a>
         <a href="mailto:info@velycio.com">info@velycio.com</a>
       </div>
-      <small>© <span id="year">2026</span> Velycio · Hecho con 💗 para acompañarte</small>
+      <small>© <span id="year">2026</span> Velycio · Hecho con cariño para acompañarte</small>
     </div>
   </footer>
 
   <!-- Mobile sticky CTA -->
   <div class="mobile-cta" id="mcta">
-    <a class="btn btn-primary" href="#aviso">🔔 Avísame del lanzamiento</a>
+    <a class="btn btn-primary" href="#aviso">Avísame del lanzamiento</a>
   </div>
 
   <script>

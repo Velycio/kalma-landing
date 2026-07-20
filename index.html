@@ -437,6 +437,10 @@
     .proof .stars { display: inline-flex; gap: 3px; margin: 8px 0 4px; }
     .proof .stars svg { width: 24px; height: 24px; color: #FFE08A; }
     .proof p { opacity: .96; max-width: 42ch; margin: 8px auto 0; font-weight: 700; }
+    /* Foto de portada (lifestyle) */
+    .hero-shot.hero-photo { width: 100%; max-width: 560px; margin-top: 26px; justify-self: center; }
+    .hero-shot.hero-photo img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 30px; border: 6px solid #fff; box-shadow: var(--shadow-lg); }
+    @media (min-width: 940px) { .hero-shot.hero-photo { margin-top: 0; } }
   </style>
 </head>
 <body>
@@ -453,9 +457,9 @@
         <span>Kalma</span>
       </a>
       <nav class="nav-links" aria-label="Principal">
-        <a href="/funciones/contador-de-contracciones.html">Contracciones</a>
         <a href="/funciones/">Funciones</a>
         <a href="/blog/">Blog</a>
+        <a href="/privacidad/">Privacidad</a>
       </nav>
       <a class="btn btn-primary" href="#aviso">Avísame del lanzamiento</a>
     </div>
@@ -496,9 +500,10 @@
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.6V11a6 6 0 0 1 12 0v5.6l1.6 2.1H4.4Z"/><path d="M9.8 19.7a2.2 2.2 0 0 0 4.4 0"/></svg> Te avisamos sin spam</span>
           </div>
         </div>
-        <div class="hero-shot">
-          <img src="assets/screen-overview.jpg" width="760" height="1555" fetchpriority="high" decoding="async"
-               alt="Pantalla principal de Kalma con la cuenta atrás del embarazo y accesos a contracciones, bolsa rota, diario y calendario." />
+        <div class="hero-shot hero-photo">
+          <img src="assets/hero-mama.jpg" width="1650" height="928" fetchpriority="high" decoding="async"
+               onerror="this.onerror=null;this.closest('.hero-shot').classList.remove('hero-photo');this.src='assets/screen-overview.jpg';this.width=760;this.height=1555;"
+               alt="Embarazada usando la app Kalma en el móvil, relajada en su terraza." />
         </div>
       </div>
     </section>
@@ -666,10 +671,9 @@
       </a>
       <div class="foot-links">
         <a href="/funciones/">Funciones</a>
-        <a href="/funciones/contador-de-contracciones.html">Contracciones</a>
         <a href="/blog/">Blog</a>
         <a href="#aviso">Lanzamiento</a>
-        <a href="https://velycio.github.io/kalma-privacy/privacy-policy.html" target="_blank" rel="noopener">Política de privacidad</a>
+        <a href="/privacidad/">Política de privacidad</a>
         <a href="mailto:info@velycio.com">info@velycio.com</a>
       </div>
       <small>© <span id="year">2026</span> Velycio · Hecho con cariño para acompañarte</small>

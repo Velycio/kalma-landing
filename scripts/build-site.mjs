@@ -38,6 +38,7 @@ function header(active) {
   <nav class="nav-links" aria-label="Principal">
     ${link("/funciones/", "Funciones", "func")}
     ${link("/blog/", "Blog", "blog")}
+    ${link("/privacidad/", "Privacidad", "priv")}
   </nav>
   <a class="btn btn-primary" href="/#aviso">Avísame del lanzamiento</a>
 </div></header>`;
@@ -61,7 +62,7 @@ const FOOTER = `<footer><div class="wrap">
       <h4>Recursos</h4>
       <a href="/blog/">Blog</a>
       <a href="/#features">Sobre la app</a>
-      <a href="https://velycio.github.io/kalma-privacy/privacy-policy.html" target="_blank" rel="noopener">Política de privacidad</a>
+      <a href="/privacidad/">Política de privacidad</a>
       <a href="mailto:${SITE.email}">${SITE.email}</a>
     </div>
   </div>
@@ -901,14 +902,10 @@ function featureBody(f) {
   const steps = c.how
     .map((s, i) => `<li class="reveal"><span class="step-n">${i + 1}</span><div><strong>${s.t}</strong><p>${s.d}</p></div></li>`)
     .join("");
-  const hasShot = !!SHOTS[f.slug];
   return `
-<section class="feat-split ${hasShot ? "" : "no-shot"}">
-  <div class="feat-split-text reveal">
-    <span class="kicker">${icon("check", "ic-sm")} Qué es</span>
-    <p class="feat-what">${c.what}</p>
-  </div>
-  ${hasShot ? `<div class="feat-split-shot reveal">${shotFigure(f.slug, "float")}</div>` : ""}
+<section class="feat-what-block reveal">
+  <span class="kicker">${icon("check", "ic-sm")} Qué es</span>
+  <p class="feat-what">${c.what}</p>
 </section>
 
 <section class="feat-why reveal">
@@ -1143,6 +1140,80 @@ for (const p of POSTS) {
       canonical: SITE.domain + "/blog/",
       active: "blog",
       jsonld: [breadcrumb([{ name: "Inicio", path: "/" }, { name: "Blog", path: "/blog/" }]), blogLD],
+      body,
+    })
+  );
+}
+
+/* ---------- Página de Privacidad ---------- */
+{
+  const body = `
+<div class="wrap narrow">
+  <p class="crumb"><a href="/">Inicio</a> › Privacidad</p>
+  <section class="phero reveal">
+    <span class="eyebrow">Legal</span>
+    <h1>Política de privacidad</h1>
+    <p class="lead">Tu embarazo es tuyo. Te contamos con claridad qué datos recogemos, para qué y cómo puedes borrarlos cuando quieras.</p>
+    <p class="article-meta">Última actualización: 20 de julio de 2026 · Responsable: Velycio (${SITE.email})</p>
+  </section>
+  <section class="prose article-body reveal">
+    <h2>1. Datos que recogemos</h2>
+    <p>Kalma solo recoge los datos que tú nos proporcionas de forma voluntaria al usar la app:</p>
+    <ul>
+      <li>Tu nombre y el del bebé (o los nombres que estéis considerando).</li>
+      <li>La fecha de tu última regla, para calcular la semana de embarazo y la fecha probable de parto.</li>
+      <li>Tu correo electrónico, para crear tu cuenta y sincronizarla con tu pareja.</li>
+      <li>Los registros que creas en la app: contracciones, cronómetro de bolsa rota, diario, patadas, citas, etc.</li>
+      <li>El hospital que selecciones, si lo indicas.</li>
+    </ul>
+
+    <h2>2. Cómo usamos tus datos</h2>
+    <p>Usamos tus datos <strong>exclusivamente</strong> para que la app funcione:</p>
+    <ul>
+      <li>Calcular tu semana de embarazo y tu fecha probable de parto.</li>
+      <li>Personalizar el contenido semana a semana.</li>
+      <li>Sincronizar la información entre los dispositivos vinculados a tu cuenta (tú y tu pareja).</li>
+    </ul>
+    <p><strong>No vendemos ni compartimos tus datos personales con fines comerciales.</strong></p>
+
+    <h2>3. Dónde se almacenan tus datos</h2>
+    <p>Tus datos se almacenan en <strong>Supabase</strong> (supabase.com), con servidores en la <strong>Unión Europea</strong>, cumpliendo con el Reglamento General de Protección de Datos (RGPD).</p>
+
+    <h2>4. Enlaces de afiliado</h2>
+    <p>Algunas secciones pueden incluir enlaces de afiliado de Amazon (Amazon Associates). Si sigues uno de esos enlaces, se aplican las condiciones y la política de privacidad de Amazon de forma independiente a Kalma.</p>
+
+    <h2>5. Kalma no es una app médica</h2>
+    <div class="med">${icon("shield", "ic-sm")} <span>Kalma es una app de <b>información y bienestar</b>. No proporciona consejo médico ni sustituye a tu matrona o tu médico. Ante cualquier duda de salud, consulta siempre con un profesional.</span></div>
+
+    <h2>6. Tus derechos (RGPD)</h2>
+    <p>Puedes solicitar en cualquier momento el <strong>acceso</strong>, la <strong>rectificación</strong> o la <strong>eliminación</strong> de tus datos escribiéndonos a <a href="mailto:${SITE.email}">${SITE.email}</a>.</p>
+
+    <h2>7. Menores</h2>
+    <p>Kalma no está dirigida a personas menores de 13 años.</p>
+
+    <h2>8. Cambios en esta política</h2>
+    <p>Si actualizamos esta política, publicaremos la nueva versión en esta misma página, con su fecha de actualización.</p>
+
+    <h2>9. Cómo eliminar tu cuenta y tus datos</h2>
+    <p>Tienes dos formas de eliminar tu cuenta y todos tus datos:</p>
+    <ul>
+      <li><strong>Desde la app:</strong> en Ajustes → Editar perfil → Eliminar cuenta.</li>
+      <li><strong>Por correo:</strong> escríbenos a <a href="mailto:${SITE.email}?subject=Eliminar%20cuenta%20KALMA">${SITE.email}</a> con el asunto «Eliminar cuenta KALMA».</li>
+    </ul>
+    <p>Procesamos la solicitud en un plazo máximo de 30 días, tras el cual la eliminación es permanente.</p>
+
+    <h2>10. Contacto</h2>
+    <p>Velycio · <a href="mailto:${SITE.email}">${SITE.email}</a></p>
+  </section>
+</div>`;
+  write(
+    "privacidad/index.html",
+    layout({
+      title: "Política de privacidad — Kalma",
+      desc: "Cómo Kalma recoge, usa y protege tus datos durante el embarazo, y cómo eliminar tu cuenta. Datos en la UE, cumpliendo el RGPD.",
+      canonical: SITE.domain + "/privacidad/",
+      active: "priv",
+      jsonld: [breadcrumb([{ name: "Inicio", path: "/" }, { name: "Privacidad", path: "/privacidad/" }])],
       body,
     })
   );

@@ -1169,7 +1169,8 @@ for (const p of POSTS) {
     <blockquote class="pull">Empecé a apuntármelo todo. Quería algo que me ayudara a recordarlo y que me acompañara durante el embarazo y, sobre todo, el día del parto.</blockquote>
     <p>Busqué apps que ya lo hicieran. Y me llevé una sorpresa: casi ninguna hacía más de una cosa, muchas estaban descuidadas y llenas de anuncios… y <strong>ninguna dejaba vivir el embarazo en pareja</strong>. La pareja siempre se quedaba fuera.</p>
     <p>Entonces decidí crear <strong>Kalma</strong>: reunir en una sola app las funciones que de verdad necesitas —contracciones, patadas, diario, bebé semana a semana, bolsa del hospital, respiración— con información clara y cálida, <strong>sin anuncios y sin ruido</strong>. Y con algo que echaba de menos en todas las demás: que tu pareja lo viva contigo, en tiempo real.</p>
-    <p><em>Inés ya nació. Kalma se queda para acompañar a otras familias en el camino más importante de sus vidas.</em></p>
+    <p>La creé para mi mujer y para mí. Pero por el camino entendimos algo: si a nosotros nos hizo tanta falta, seguro que a muchas otras familias también. Así que decidimos <strong>abrirla al mundo</strong>, para que ninguna pareja tenga que vivir esta etapa entre información confusa y ruido, sino de la <strong>forma más clara, tranquila y bonita posible</strong>.</p>
+    <p><em>Inés ya nació. Kalma se queda para acompañar a otras familias en el camino más importante de sus vidas. Ojalá te acompañe tanto como nos acompañó a nosotros.</em></p>
     <p class="signature">— Carlos, fundador de Kalma y Velycio</p>
   </section>
   <section class="prose">

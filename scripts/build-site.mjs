@@ -38,7 +38,6 @@ function header(active) {
   <nav class="nav-links" aria-label="Principal">
     ${link("/funciones/", "Funciones", "func")}
     ${link("/blog/", "Blog", "blog")}
-    ${link("/privacidad/", "Privacidad", "priv")}
   </nav>
   <a class="btn btn-primary" href="/#aviso">Avísame del lanzamiento</a>
 </div></header>`;

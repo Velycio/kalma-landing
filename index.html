@@ -139,8 +139,12 @@
       background: rgba(253, 244, 243, 0.78);
       border-bottom: 1px solid rgba(168, 87, 111, 0.08);
     }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 66px; }
-    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav { display: flex; align-items: center; gap: 14px; height: 66px; }
+    .nav-links { display: none; gap: 22px; margin-left: auto; font-weight: 800; font-size: 15px; }
+    .nav-links a { color: var(--plum); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--rose-deep); }
+    @media (min-width: 820px) { .nav-links { display: flex; } }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: 0 0 auto; }
     .brand img { width: 34px; height: 34px; }
     .brand span {
       font-family: 'Fraunces', serif; font-weight: 600; font-size: 25px;
@@ -414,6 +418,11 @@
         <img src="assets/logo-rose.svg" alt="" width="34" height="34" />
         <span>Kalma</span>
       </a>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="/funciones/contador-de-contracciones.html">Contracciones</a>
+        <a href="/funciones/">Funciones</a>
+        <a href="/blog/">Blog</a>
+      </nav>
       <a class="btn btn-primary" href="#aviso">Avísame del lanzamiento</a>
     </div>
   </header>

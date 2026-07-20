@@ -1146,6 +1146,7 @@ for (const p of POSTS) {
 
 /* ---------- Página de Privacidad ---------- */
 {
+  const pEmail = "info@kalmaapp.pro"; // email de contacto en la política de privacidad
   const body = `
 <div class="wrap narrow">
   <p class="crumb"><a href="/">Inicio</a> › Privacidad</p>
@@ -1153,7 +1154,7 @@ for (const p of POSTS) {
     <span class="eyebrow">Legal</span>
     <h1>Política de privacidad</h1>
     <p class="lead">Tu embarazo es tuyo. Te contamos con claridad qué datos recogemos, para qué y cómo puedes borrarlos cuando quieras.</p>
-    <p class="article-meta">Última actualización: 20 de julio de 2026 · Responsable: Velycio (${SITE.email})</p>
+    <p class="article-meta">Última actualización: 20 de julio de 2026 · Responsable: Velycio (${pEmail})</p>
   </section>
   <section class="prose article-body reveal">
     <h2>1. Datos que recogemos</h2>
@@ -1182,27 +1183,32 @@ for (const p of POSTS) {
     <p>Algunas secciones pueden incluir enlaces de afiliado de Amazon (Amazon Associates). Si sigues uno de esos enlaces, se aplican las condiciones y la política de privacidad de Amazon de forma independiente a Kalma.</p>
 
     <h2>5. Kalma no es una app médica</h2>
-    <div class="med">${icon("shield", "ic-sm")} <span>Kalma es una app de <b>información y bienestar</b>. No proporciona consejo médico ni sustituye a tu matrona o tu médico. Ante cualquier duda de salud, consulta siempre con un profesional.</span></div>
+    <div class="med">${icon("shield", "ic-sm")} <span>Kalma es una app de <b>información y bienestar</b>. <b>No es un producto sanitario</b>, no realiza diagnósticos ni ofrece consejo, tratamiento o supervisión médica, y su contenido no debe interpretarse como tal. No sustituye a tu matrona, a tu médico ni a los servicios de emergencia. Ante cualquier duda, síntoma o urgencia, contacta con un profesional sanitario o llama al 112.</span></div>
 
-    <h2>6. Tus derechos (RGPD)</h2>
-    <p>Puedes solicitar en cualquier momento el <strong>acceso</strong>, la <strong>rectificación</strong> o la <strong>eliminación</strong> de tus datos escribiéndonos a <a href="mailto:${SITE.email}">${SITE.email}</a>.</p>
+    <h2>6. Descargo y limitación de responsabilidad</h2>
+    <p>Las herramientas de Kalma (contador de contracciones, contador de patadas, cronómetro de bolsa rota, información semana a semana, checklists, etc.) son <strong>ayudas de registro y orientación</strong>, orientativas y no exactas. Las decisiones sobre tu salud y la de tu bebé son <strong>responsabilidad exclusiva tuya y de tus profesionales sanitarios</strong>.</p>
+    <p>En la medida máxima permitida por la ley aplicable, <strong>Velycio y Kalma quedan exonerados de toda responsabilidad</strong> por cualquier daño directo, indirecto, incidental o consecuente, así como por cualquier decisión, acción u omisión, derivados del uso de la app, de la imposibilidad de usarla o de la confianza depositada en su contenido. El uso de Kalma es voluntario e implica la <strong>aceptación de este descargo de responsabilidad</strong>.</p>
+    <p>Kalma se ofrece «tal cual», sin garantías de exactitud, disponibilidad o adecuación a un fin concreto. Nada en esta política excluye responsabilidades que no puedan limitarse legalmente (por ejemplo, las derivadas de la normativa de consumo aplicable).</p>
 
-    <h2>7. Menores</h2>
+    <h2>7. Tus derechos (RGPD)</h2>
+    <p>Puedes solicitar en cualquier momento el <strong>acceso</strong>, la <strong>rectificación</strong> o la <strong>eliminación</strong> de tus datos escribiéndonos a <a href="mailto:${pEmail}">${pEmail}</a>.</p>
+
+    <h2>8. Menores</h2>
     <p>Kalma no está dirigida a personas menores de 13 años.</p>
 
-    <h2>8. Cambios en esta política</h2>
+    <h2>9. Cambios en esta política</h2>
     <p>Si actualizamos esta política, publicaremos la nueva versión en esta misma página, con su fecha de actualización.</p>
 
-    <h2>9. Cómo eliminar tu cuenta y tus datos</h2>
+    <h2>10. Cómo eliminar tu cuenta y tus datos</h2>
     <p>Tienes dos formas de eliminar tu cuenta y todos tus datos:</p>
     <ul>
       <li><strong>Desde la app:</strong> en Ajustes → Editar perfil → Eliminar cuenta.</li>
-      <li><strong>Por correo:</strong> escríbenos a <a href="mailto:${SITE.email}?subject=Eliminar%20cuenta%20KALMA">${SITE.email}</a> con el asunto «Eliminar cuenta KALMA».</li>
+      <li><strong>Por correo:</strong> escríbenos a <a href="mailto:${pEmail}?subject=Eliminar%20cuenta%20KALMA">${pEmail}</a> con el asunto «Eliminar cuenta KALMA».</li>
     </ul>
     <p>Procesamos la solicitud en un plazo máximo de 30 días, tras el cual la eliminación es permanente.</p>
 
-    <h2>10. Contacto</h2>
-    <p>Velycio · <a href="mailto:${SITE.email}">${SITE.email}</a></p>
+    <h2>11. Contacto</h2>
+    <p>Velycio · <a href="mailto:${pEmail}">${pEmail}</a></p>
   </section>
 </div>`;
   write(

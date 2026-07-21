@@ -214,7 +214,9 @@ footer{background:var(--plum);color:#f2e4e8;padding:44px 0 36px;margin-top:40px}
 .blog-grid{margin-top:24px}
 .post-featured{display:grid;grid-template-columns:1fr;background:rgba(255,255,255,.95);border:1px solid rgba(168,87,111,.1);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);text-decoration:none;color:inherit;transition:transform .25s var(--ease),box-shadow .25s var(--ease);margin-top:8px}
 .post-featured:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.post-featured-cover,.post-card-cover{position:relative;background:linear-gradient(135deg,var(--pink-100),var(--pink-200));display:grid;place-items:center;min-height:180px}
+.post-featured-cover,.post-card-cover{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--pink-100),var(--pink-200));display:grid;place-items:center;min-height:180px}
+.cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.post-card-cover{min-height:200px}
 .post-cover-ico{width:64px;height:64px;color:var(--rose-deep);opacity:.85}
 .post-cover-ico .ic{width:64px;height:64px}
 .post-featured-body{padding:26px 24px}
@@ -223,7 +225,7 @@ footer{background:var(--plum);color:#f2e4e8;padding:44px 0 36px;margin-top:40px}
 .post-card{display:flex;flex-direction:column;background:rgba(255,255,255,.95);border:1px solid rgba(168,87,111,.1);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
 .post-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
 .post-card:hover h3{color:var(--rose-deep)}
-.post-card-cover{min-height:140px}
+.post-card-cover{min-height:200px}
 .post-card-cover .post-cover-ico,.post-card-cover .post-cover-ico .ic{width:48px;height:48px}
 .post-card-body{padding:20px 20px 22px}
 .post-card-body h3{font-size:1.24rem;margin-bottom:6px}

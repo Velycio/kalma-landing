@@ -1019,6 +1019,18 @@ const POST_TAG = {
 };
 const tagOf = (p) => POST_TAG[p.slug] || "Embarazo";
 
+// Fotos de portada (Pexels, uso comercial libre sin atribución)
+const POST_COVER = {
+  "como-usar-un-contador-de-contracciones": "contracciones.jpg",
+  "regla-5-1-1-cuando-ir-al-hospital": "regla-511.jpg",
+  "contar-patadas-del-bebe": "patadas.jpg",
+  "que-llevar-bolsa-hospital": "bolsa.jpg",
+};
+const coverImg = (p) =>
+  POST_COVER[p.slug]
+    ? `<img class="cover-img" loading="lazy" src="/assets/blog/${POST_COVER[p.slug]}" alt="${esc(p.title)}">`
+    : `<span class="post-cover-ico">${iconFor(p.feature)}</span>`;
+
 const shareBar = (url, title) => {
   const u = encodeURIComponent(url);
   const t = encodeURIComponent(title);
@@ -1032,7 +1044,7 @@ const shareBar = (url, title) => {
 
 const postCard = (r) =>
   `<a class="post-card reveal" href="/blog/${r.slug}.html">
-    <div class="post-card-cover" aria-hidden="true"><span class="post-cover-ico">${iconFor(r.feature)}</span></div>
+    <div class="post-card-cover">${coverImg(r)}</div>
     <div class="post-card-body">
       <span class="chip">${tagOf(r)}</span>
       <h3>${r.title}</h3>
@@ -1102,7 +1114,7 @@ for (const p of POSTS) {
   const [featured, ...rest] = POSTS;
   const featuredCard = `
   <a class="post-featured reveal" href="/blog/${featured.slug}.html">
-    <div class="post-featured-cover" aria-hidden="true"><span class="post-cover-ico">${iconFor(featured.feature)}</span></div>
+    <div class="post-featured-cover">${coverImg(featured)}</div>
     <div class="post-featured-body">
       <span class="chip">Destacado · ${tagOf(featured)}</span>
       <h2>${featured.title}</h2>

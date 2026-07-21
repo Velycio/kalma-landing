@@ -35,12 +35,14 @@ function header(active) {
     `<a href="${href}"${active === key ? ' aria-current="page"' : ""}>${label}</a>`;
   return `<header><div class="wrap nav">
   <a class="brand" href="/" aria-label="Kalma — inicio"><img src="/assets/logo-rose.svg" alt="" width="34" height="34"><span>Kalma</span></a>
-  <nav class="nav-links" aria-label="Principal">
+  <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navmenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <nav class="nav-links" id="navmenu" aria-label="Principal">
     ${link("/funciones/", "Funciones", "func")}
     ${link("/blog/", "Blog", "blog")}
     ${link("/sobre-nosotros/", "Nosotros", "about")}
+    <a class="nav-cta" href="/#aviso">Avísame del lanzamiento</a>
   </nav>
-  <a class="btn btn-primary" href="/#aviso">Avísame del lanzamiento</a>
+  <a class="btn btn-primary nav-btn-desktop" href="/#aviso">Avísame del lanzamiento</a>
 </div></header>`;
 }
 

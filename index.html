@@ -143,7 +143,19 @@
     .nav-links { display: none; gap: 22px; margin-left: auto; font-weight: 800; font-size: 15px; }
     .nav-links a { color: var(--plum); text-decoration: none; transition: color .2s; }
     .nav-links a:hover { color: var(--rose-deep); }
-    @media (min-width: 820px) { .nav-links { display: flex; } }
+    .nav-cta { display: none; }
+    .nav-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: auto; border: 0; background: transparent; color: var(--plum); cursor: pointer; border-radius: 12px; }
+    .nav-toggle svg { width: 26px; height: 26px; }
+    .nav-toggle:focus-visible { outline: 3px solid var(--rose-deep); outline-offset: 2px; }
+    @media (min-width: 860px) { .nav-links { display: flex; } .nav-toggle { display: none; } }
+    @media (max-width: 859px) {
+      .nav-btn-desktop { display: none; }
+      .nav-links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; margin: 0; background: rgba(253,244,243,.98); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); padding: 8px 22px 16px; border-bottom: 1px solid rgba(168,87,111,.12); box-shadow: var(--shadow-md); }
+      .nav-links:not(.open) { display: none; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 14px 4px; font-size: 17px; border-bottom: 1px solid var(--pink-100); }
+      .nav-cta { display: block; margin-top: 12px; padding: 14px; text-align: center; background: linear-gradient(135deg, var(--rose-bright), var(--rose)); color: #fff; border-radius: 100px; border: 0; font-weight: 800; box-shadow: 0 10px 22px rgba(197,113,138,.4); }
+    }
     .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: 0 0 auto; }
     .brand img { width: 34px; height: 34px; }
     .brand span {
@@ -460,12 +472,14 @@
         <img src="assets/logo-rose.svg" alt="" width="34" height="34" />
         <span>Kalma</span>
       </a>
-      <nav class="nav-links" aria-label="Principal">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navmenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <nav class="nav-links" id="navmenu" aria-label="Principal">
         <a href="/funciones/">Funciones</a>
         <a href="/blog/">Blog</a>
         <a href="/sobre-nosotros/">Nosotros</a>
+        <a class="nav-cta" href="#aviso">Avísame del lanzamiento</a>
       </nav>
-      <a class="btn btn-primary" href="#aviso">Avísame del lanzamiento</a>
+      <a class="btn btn-primary nav-btn-desktop" href="#aviso">Avísame del lanzamiento</a>
     </div>
   </header>
 
@@ -712,6 +726,17 @@
     }
 
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* Menú móvil (hamburguesa) */
+    (function () {
+      const t = document.getElementById('nav-toggle');
+      const m = document.getElementById('navmenu');
+      if (!t || !m) return;
+      const setOpen = (o) => { m.classList.toggle('open', o); t.setAttribute('aria-expanded', o ? 'true' : 'false'); t.setAttribute('aria-label', o ? 'Cerrar menú' : 'Abrir menú'); };
+      t.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!m.classList.contains('open')); });
+      m.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+      document.addEventListener('click', (e) => { if (!m.contains(e.target) && !t.contains(e.target)) setOpen(false); });
+    })();
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

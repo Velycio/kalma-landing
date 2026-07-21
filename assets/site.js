@@ -2,6 +2,27 @@
 (function () {
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* Menú móvil (hamburguesa) */
+  var navToggle = document.getElementById("nav-toggle");
+  var navMenu = document.getElementById("navmenu");
+  if (navToggle && navMenu) {
+    var setOpen = function (open) {
+      navMenu.classList.toggle("open", open);
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      navToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    };
+    navToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setOpen(!navMenu.classList.contains("open"));
+    });
+    navMenu.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () { setOpen(false); });
+    });
+    document.addEventListener("click", function (e) {
+      if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) setOpen(false);
+    });
+  }
+
   /* Reveal on scroll (con stagger dentro de cada grid) */
   document.querySelectorAll(".grid").forEach(function (g) {
     Array.prototype.forEach.call(g.querySelectorAll(".reveal"), function (el, i) {

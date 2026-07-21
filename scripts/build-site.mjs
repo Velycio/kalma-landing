@@ -1164,7 +1164,7 @@ for (const p of POSTS) {
     <p class="lead">La historia de por qué existe Kalma — contada por quien la vivió de primera mano.</p>
   </section>
   <figure class="about-cover reveal">
-    <img loading="lazy" src="/assets/about.jpg" width="1600" height="1000" alt="El equipo de Kalma"
+    <img loading="lazy" src="/assets/about.png" width="1600" height="1000" alt="El equipo de Kalma"
          onerror="this.closest('figure').style.display='none'">
   </figure>
   <section class="prose article-body about-story reveal">
@@ -1182,7 +1182,13 @@ for (const p of POSTS) {
     <h2>Por qué Kalma es diferente</h2>
     <div class="grid cols-3">${valueCards}</div>
   </section>
-  ${ctaBand("Acompáñanos desde el principio", "Kalma está en beta cerrada. Déjanos tu email y te avisamos en cuanto puedas descargarla.")}
+  <div class="cta-band about-cta reveal">
+    <div class="about-stars" aria-hidden="true">${icon("star", "st")}${icon("star", "st")}${icon("star", "st")}${icon("star", "st")}${icon("star", "st")}</div>
+    <h2>Vive tu embarazo con Kalma</h2>
+    <p>Gratis, sin anuncios y para compartir con tu pareja. Muy pronto en iPhone y Android — sé de las primeras en tenerla.</p>
+    <a class="btn" href="/#aviso">${icon("bell", "ic-inline")} Avísame del lanzamiento</a>
+    <p class="about-cta-note">4,9★ de las mamás de nuestra beta · sin spam, solo el aviso de lanzamiento</p>
+  </div>
 </div>`;
   write(
     "sobre-nosotros/index.html",

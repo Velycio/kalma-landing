@@ -772,6 +772,21 @@ const FEATURE_ICON = {
 };
 const iconFor = (slug) => icon(FEATURE_ICON[slug] || "heart");
 
+// Foto de portada por función (Pexels, uso comercial libre sin atribución)
+const FEATURE_COVER = {
+  "contador-de-contracciones": "/assets/blog/contracciones.jpg",
+  "contador-de-patadas": "/assets/blog/patadas.jpg",
+  "bolsa-del-hospital": "/assets/blog/bolsa.jpg",
+  "diario-de-embarazo": "/assets/funciones/diario.jpg",
+  "bebe-semana-a-semana": "/assets/funciones/bebe.jpg",
+  "app-embarazo-pareja": "/assets/funciones/pareja.jpg",
+  "citas-medicas": "/assets/funciones/citas.jpg",
+  "preguntas-embarazo": "/assets/funciones/preguntas.jpg",
+  "tienda": "/assets/funciones/tienda.jpg",
+  "respiracion": "/assets/funciones/respiracion.jpg",
+  "bolsa-rota": "/assets/funciones/bolsa-rota.jpg",
+};
+
 // Capturas reales de la app (carrusel) asignadas a cada función
 const SHOTS = {
   "contador-de-contracciones": { src: "screen-contractions.jpg", alt: "Pantalla del contador de contracciones de Kalma con cronómetro, métricas en tiempo real y aviso de la regla 5-1-1." },
@@ -953,6 +968,7 @@ for (const f of FEATURES) {
     <p class="lead">${f.lead}</p>
     <a class="btn btn-primary" href="/#aviso">${icon("bell", "ic-inline")} Avísame del lanzamiento</a>
   </section>
+  ${FEATURE_COVER[f.slug] ? `<figure class="feat-cover reveal"><img loading="lazy" src="${FEATURE_COVER[f.slug]}" alt="${esc(f.h1)}"></figure>` : ""}
   <section class="prose feat-content">
     ${featureBody(f)}
     ${postLinks ? `<h2>Sigue leyendo</h2><div class="grid cols-2">${postLinks}</div>` : ""}

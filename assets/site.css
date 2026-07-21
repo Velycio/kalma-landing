@@ -152,6 +152,8 @@ footer{background:var(--plum);color:#f2e4e8;padding:44px 0 36px;margin-top:40px}
 .cat-desc{color:var(--muted);margin-top:-4px}
 .feat-hero{text-align:center;display:flex;flex-direction:column;align-items:center}
 .feat-hero .lead{margin-left:auto;margin-right:auto}
+.feat-cover{margin:26px 0 6px}
+.feat-cover img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:26px;border:6px solid #fff;box-shadow:var(--shadow-lg)}
 .feat-hero-ico{width:76px;height:76px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(135deg,var(--pink-100),var(--pink-200));box-shadow:var(--shadow-sm);margin-bottom:6px;color:var(--rose-deep)}
 .feat-hero-ico .ic{width:40px;height:40px}
 .kicker{display:inline-flex;align-items:center;gap:7px;color:var(--rose-deep);font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase}

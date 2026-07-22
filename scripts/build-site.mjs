@@ -4,7 +4,7 @@
  * Emite: funciones/*.html, blog/*.html, blog/index.html, sitemap.xml, robots.txt, llms.txt
  * La home (index.html) se mantiene a mano; aquí solo se generan las páginas nuevas.
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync, readdirSync, readFileSync, existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -756,6 +756,19 @@ const POSTS = [
   },
 ];
 
+// Posts adicionales generados por el bot (posts/*.json). Se añaden y se ordenan por fecha (más nuevo primero → portada del blog).
+const POSTS_DIR = resolve(ROOT, "posts");
+if (existsSync(POSTS_DIR)) {
+  for (const file of readdirSync(POSTS_DIR).filter((f) => f.endsWith(".json")).sort()) {
+    try {
+      POSTS.push(JSON.parse(readFileSync(resolve(POSTS_DIR, file), "utf8")));
+    } catch (e) {
+      console.warn("[build] post inválido:", file, e.message);
+    }
+  }
+}
+POSTS.sort((a, b) => String(b.dateISO || "").localeCompare(String(a.dateISO || "")));
+
 /* ---------- Iconos y capturas por función ---------- */
 const FEATURE_ICON = {
   "contador-de-contracciones": "stopwatch",
@@ -1034,7 +1047,7 @@ const POST_TAG = {
   "contar-patadas-del-bebe": "Movimientos del bebé",
   "que-llevar-bolsa-hospital": "Preparación",
 };
-const tagOf = (p) => POST_TAG[p.slug] || "Embarazo";
+const tagOf = (p) => p.tag || POST_TAG[p.slug] || "Embarazo";
 
 // Fotos de portada (Pexels, uso comercial libre sin atribución)
 const POST_COVER = {
@@ -1043,10 +1056,17 @@ const POST_COVER = {
   "contar-patadas-del-bebe": "patadas.jpg",
   "que-llevar-bolsa-hospital": "bolsa.jpg",
 };
-const coverImg = (p) =>
-  POST_COVER[p.slug]
-    ? `<img class="cover-img" loading="lazy" src="/assets/blog/${POST_COVER[p.slug]}" alt="${esc(p.title)}">`
+const coverPath = (p) => {
+  const c = p.cover || POST_COVER[p.slug];
+  if (!c) return null;
+  return c.startsWith("/") ? c : `/assets/blog/${c}`;
+};
+const coverImg = (p) => {
+  const src = coverPath(p);
+  return src
+    ? `<img class="cover-img" loading="lazy" src="${src}" alt="${esc(p.title)}">`
     : `<span class="post-cover-ico">${iconFor(p.feature)}</span>`;
+};
 
 const shareBar = (url, title) => {
   const u = encodeURIComponent(url);

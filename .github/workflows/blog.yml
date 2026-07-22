@@ -1,0 +1,46 @@
+name: Blog semanal (Kalma)
+
+# Se ejecuta en los servidores de GitHub (no necesita tu ordenador).
+# Martes 02:00 UTC ≈ 04:00 hora peninsular de España (verano).
+on:
+  schedule:
+    - cron: "0 2 * * 2"
+  workflow_dispatch: {} # permite lanzarlo a mano para probar
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  nuevo-post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Redactar artículo con Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MODEL: ${{ vars.MODEL }}
+        run: node scripts/generate-post.mjs
+
+      - name: Regenerar el sitio
+        run: node scripts/build-site.mjs
+
+      - name: Abrir Pull Request para tu revisión
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: blog/post-automatico
+          delete-branch: true
+          commit-message: "blog: nuevo artículo automático"
+          title: "📝 Nuevo post del blog — revisa y pulsa Merge para publicar"
+          body: |
+            Artículo generado automáticamente por el agente semanal de Kalma.
+
+            **Para publicarlo:** revisa el contenido y pulsa **Merge**. Se desplegará solo en kalmaapp.pro en 1-2 minutos.
+            **Para descartarlo:** cierra este PR sin hacer merge.
+
+            > Recuerda: es contenido de salud. Dale un vistazo antes de publicar.

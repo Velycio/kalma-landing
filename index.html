@@ -274,7 +274,7 @@
     .step p { color: var(--muted); font-size: 1rem; }
 
     /* ===== Valor / Velycio ===== */
-    .value-card { max-width: 760px; margin: 0 auto; text-align: center; background: rgba(255,255,255,0.92); border: 1px solid rgba(168,87,111,0.1); border-radius: 28px; padding: 40px 26px; box-shadow: var(--shadow-md); }
+    .value-card { max-width: 680px; margin: 0 auto; text-align: center; background: rgba(255,255,255,0.92); border: 1px solid rgba(168,87,111,0.1); border-radius: 28px; padding: 40px 26px; box-shadow: var(--shadow-md); }
     .value-card h2 { font-size: clamp(1.6rem, 5.4vw, 2.3rem); margin: 8px 0 14px; }
     .value-card > p { color: var(--muted); font-size: 1.06rem; max-width: 60ch; margin: 0 auto; }
     .value-card b { color: var(--plum); }
@@ -452,16 +452,30 @@
     .proof .stars { display: inline-flex; gap: 3px; margin: 8px 0 4px; }
     .proof .stars svg { width: 24px; height: 24px; color: #FFE08A; }
     .proof p { opacity: .96; max-width: 42ch; margin: 8px auto 0; font-weight: 700; }
-    /* Reseñas (carrusel) */
+    /* Reseñas: rating + carrusel */
     #resenas { padding-top: 8px; }
-    .reviews-track { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 22px 26px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .reviews-head { text-align: center; max-width: 620px; margin: 0 auto 34px; }
+    .reviews-rating { display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 14px; background: #fff; border: 1px solid var(--pink-200); box-shadow: var(--shadow-sm); padding: 10px 18px; border-radius: 100px; }
+    .r-stars { display: inline-flex; gap: 3px; color: #E8A13C; }
+    .r-stars svg { width: 18px; height: 18px; }
+    .r-stars.big svg { width: 22px; height: 22px; }
+    .reviews-rating-txt { font-weight: 700; color: var(--muted); font-size: 14.5px; }
+    .reviews-rating-txt b { color: var(--plum); font-size: 16px; }
+    .reviews-carousel { display: flex; align-items: center; gap: 10px; }
+    .reviews-viewport { overflow: hidden; flex: 1 1 auto; }
+    .reviews-track { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 6px 2px 24px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
     .reviews-track::-webkit-scrollbar { display: none; }
-    .review { flex: 0 0 min(340px, 82vw); scroll-snap-align: center; margin: 0; background: rgba(255,255,255,0.96); border: 1px solid rgba(168,87,111,0.1); border-radius: var(--radius); padding: 26px 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px; }
-    .review .r-stars { display: inline-flex; gap: 3px; color: #E8A13C; }
-    .review .r-stars svg { width: 18px; height: 18px; }
-    .review blockquote { margin: 0; font-family: 'Fraunces', serif; font-size: 1.14rem; line-height: 1.5; color: var(--plum); }
+    .review { flex: 0 0 min(340px, 80vw); scroll-snap-align: start; margin: 0; background: rgba(255,255,255,0.96); border: 1px solid rgba(168,87,111,0.1); border-radius: var(--radius); padding: 24px 22px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px; }
+    .review blockquote { margin: 0; font-family: 'Fraunces', serif; font-size: 1.1rem; line-height: 1.5; color: var(--plum); }
     .review blockquote b { color: var(--rose-deep); }
-    .review figcaption { color: var(--muted); font-weight: 800; font-size: 14px; margin-top: auto; }
+    .rev-author { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+    .rev-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; }
+    .rev-name { font-weight: 800; font-size: 14.5px; color: var(--plum); line-height: 1.2; }
+    .rev-name small { display: block; font-weight: 700; color: var(--muted); font-size: 12.5px; }
+    .rev-arrow { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--pink-200); background: #fff; color: var(--rose-deep); cursor: pointer; display: grid; place-items: center; box-shadow: var(--shadow-sm); transition: transform .2s var(--ease), background .2s; }
+    .rev-arrow:hover { transform: translateY(-2px); background: var(--pink-50); }
+    .rev-arrow svg { width: 20px; height: 20px; }
+    @media (max-width: 620px) { .rev-arrow { display: none; } }
     /* Foto de portada (lifestyle) */
     .hero-shot.hero-photo { width: 100%; max-width: 720px; margin-top: 26px; justify-self: center; }
     .hero-shot.hero-photo img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 30px; border: 6px solid #fff; box-shadow: var(--shadow-lg); }
@@ -561,17 +575,6 @@
       </div>
     </section>
 
-    <!-- ===== PRUEBA SOCIAL ===== -->
-    <section id="proof">
-      <div class="wrap">
-        <div class="proof reveal">
-          <div class="big">4,9</div>
-          <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg></div>
-          <p>Valoración media de las mamás que ya están probando Kalma en nuestra beta cerrada.</p>
-        </div>
-      </div>
-    </section>
-
     <!-- ===== SHOWCASE (carrusel en movimiento) ===== -->
     <section id="por-dentro">
       <div class="wrap">
@@ -639,7 +642,7 @@
 
     <!-- ===== AVISO DE LANZAMIENTO ===== -->
     <section class="form-sec">
-      <div class="wrap" style="max-width:560px">
+      <div class="wrap" style="max-width:680px">
         <div class="form-card android" id="aviso">
           <form id="form-wait" novalidate>
             <div class="app-badge">
@@ -681,41 +684,45 @@
         </div>
       </div>
     </section>
-    <!-- ===== RESEÑAS (carrusel) ===== -->
+    <!-- ===== RESEÑAS (rating + carrusel) ===== -->
     <section id="resenas">
       <div class="wrap">
-        <div class="head reveal">
+        <div class="reviews-head reveal">
           <span class="eyebrow">Lo que dicen las mamás</span>
-          <h2>Palabras de nuestra beta</h2>
-          <p>Esto nos cuentan las familias que ya están usando Kalma.</p>
+          <h2>Un 4,9 de media en nuestra beta</h2>
+          <div class="reviews-rating">
+            <span class="r-stars big" aria-hidden="true"></span>
+            <span class="reviews-rating-txt"><b>4,9&nbsp;/&nbsp;5</b> · valoración media de las mamás que ya están usando Kalma</span>
+          </div>
         </div>
-      </div>
-      <div class="reviews-track">
-        <figure class="review reveal">
-          <span class="r-stars" aria-label="5 de 5 estrellas"></span>
-          <blockquote>Por fin una app <b>sin anuncios</b>. Es un alivio no tener publicidad interrumpiéndote justo cuando estás contando las contracciones.</blockquote>
-          <figcaption>— Marta G. · mamá de Vega</figcaption>
-        </figure>
-        <figure class="review reveal">
-          <span class="r-stars" aria-label="5 de 5 estrellas"></span>
-          <blockquote>El contador de contracciones nos avisó con la regla 5-1-1 y supimos cuándo salir hacia el hospital. Llegamos a tiempo y sin agobios.</blockquote>
-          <figcaption>— Lucía R. · 39 semanas</figcaption>
-        </figure>
-        <figure class="review reveal">
-          <span class="r-stars" aria-label="5 de 5 estrellas"></span>
-          <blockquote>Lo que más me gustó es que mi pareja lo vivía todo conmigo desde su móvil, en directo. Nos unió muchísimo.</blockquote>
-          <figcaption>— Elena &amp; Pablo</figcaption>
-        </figure>
-        <figure class="review reveal">
-          <span class="r-stars" aria-label="5 de 5 estrellas"></span>
-          <blockquote>El diario con las ecografías y ver al bebé semana a semana es el recuerdo más bonito que me llevo del embarazo.</blockquote>
-          <figcaption>— Carmen M. · mamá de Bruno</figcaption>
-        </figure>
-        <figure class="review reveal">
-          <span class="r-stars" aria-label="5 de 5 estrellas"></span>
-          <blockquote>Tenía cuatro apps distintas y las borré todas. Kalma lo reúne todo, es clara y encima gratis.</blockquote>
-          <figcaption>— Noa P. · primer embarazo</figcaption>
-        </figure>
+        <div class="reviews-carousel">
+          <button class="rev-arrow" data-dir="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div class="reviews-viewport">
+            <div class="reviews-track" id="reviews-track">
+          <figure class="review">
+            <span class="r-stars" aria-label="5 de 5 estrellas"></span>
+            <blockquote>Por fin una app <b>sin anuncios</b>. Es un alivio no tener publicidad interrumpiéndote justo cuando estás contando las contracciones.</blockquote>
+            <figcaption class="rev-author"><img class="rev-avatar" src="/assets/reviews/av-marta.jpg" alt="" loading="lazy" width="48" height="48"><span class="rev-name">Marta G.<small>mamá de Vega</small></span></figcaption>
+          </figure>
+          <figure class="review">
+            <span class="r-stars" aria-label="5 de 5 estrellas"></span>
+            <blockquote>El contador de contracciones nos avisó con la regla 5-1-1 y supimos cuándo salir hacia el hospital. Llegamos a tiempo y sin agobios.</blockquote>
+            <figcaption class="rev-author"><img class="rev-avatar" src="/assets/reviews/av-lucia.jpg" alt="" loading="lazy" width="48" height="48"><span class="rev-name">Lucía R.<small>39 semanas</small></span></figcaption>
+          </figure>
+          <figure class="review">
+            <span class="r-stars" aria-label="5 de 5 estrellas"></span>
+            <blockquote>Lo que más me gustó es que mi pareja lo vivía todo conmigo desde su móvil, en directo. Nos unió muchísimo.</blockquote>
+            <figcaption class="rev-author"><img class="rev-avatar" src="/assets/reviews/av-elena.jpg" alt="" loading="lazy" width="48" height="48"><span class="rev-name">Elena &amp; Pablo<small></small></span></figcaption>
+          </figure>
+          <figure class="review">
+            <span class="r-stars" aria-label="5 de 5 estrellas"></span>
+            <blockquote>El diario con las ecografías y ver al bebé semana a semana es el recuerdo más bonito que me llevo del embarazo.</blockquote>
+            <figcaption class="rev-author"><img class="rev-avatar" src="/assets/reviews/av-carmen.jpg" alt="" loading="lazy" width="48" height="48"><span class="rev-name">Carmen M.<small>mamá de Bruno</small></span></figcaption>
+          </figure>
+            </div>
+          </div>
+          <button class="rev-arrow" data-dir="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
       </div>
     </section>
   </main>
@@ -781,7 +788,17 @@
     /* Rellenar estrellas de las reseñas */
     (function () {
       const star = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.85-4.25 4.15 1 5.8L12 16.9 6.75 19.6l1-5.8L3.5 9.65l5.9-.85Z"/></svg>';
-      document.querySelectorAll('.r-stars').forEach((el) => { el.innerHTML = star.repeat(5); });
+      document.querySelectorAll('.r-stars').forEach((el) => { el.innerHTML = star.repeat(el.classList.contains('big') ? 5 : 5); });
+      const track = document.getElementById('reviews-track');
+      if (track) {
+        document.querySelectorAll('.rev-arrow').forEach((b) => {
+          b.addEventListener('click', () => {
+            const card = track.querySelector('.review');
+            const dx = (card ? card.offsetWidth : 320) + 18;
+            track.scrollBy({ left: dx * parseInt(b.dataset.dir, 10), behavior: 'smooth' });
+          });
+        });
+      }
     })();
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -215,6 +215,12 @@ footer{background:var(--plum);color:#f2e4e8;padding:44px 0 36px;margin-top:40px}
 .share-lbl{font-weight:800;color:var(--muted);font-size:14px;margin-right:4px}
 .share-btn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1.5px solid var(--pink-200);color:var(--rose-deep);box-shadow:var(--shadow-sm);transition:transform .2s var(--ease),background .2s}
 .share-btn:hover{transform:translateY(-2px);background:var(--pink-50)}
+.share-btn svg{width:20px;height:20px}
+.post-cover-lead{margin:6px 0 4px}
+.post-cover-lead img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:26px;border:6px solid #fff;box-shadow:var(--shadow-lg)}
+.foot-ig{display:inline-flex;align-items:center;gap:8px;margin-top:14px;color:#f2c9d4;text-decoration:none;font-weight:700;font-size:14.5px}
+.foot-ig:hover{color:#fff;text-decoration:underline}
+.foot-ig svg{width:22px;height:22px}
 
 /* ============ Blog: portada/rejilla ============ */
 .blog-grid{margin-top:24px}

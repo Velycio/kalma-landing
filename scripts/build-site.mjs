@@ -51,6 +51,7 @@ const FOOTER = `<footer><div class="wrap">
     <div>
       <a class="brand" href="/" aria-label="Kalma"><img src="/assets/logo-rose.svg" alt="" width="30" height="30"><span>Kalma</span></a>
       <p class="tag">La app gratuita que te acompaña semana a semana durante el embarazo. iPhone y Android.</p>
+      <a class="foot-ig" href="https://instagram.com/hello.kalma" target="_blank" rel="noopener" aria-label="Kalma en Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="16.7" cy="7.3" r="1.1" fill="currentColor" stroke="none"/></svg> @hello.kalma</a>
     </div>
     <div>
       <h4>Funciones</h4>
@@ -1058,8 +1059,8 @@ const POST_COVER = {
 };
 const coverPath = (p) => {
   const c = p.cover || POST_COVER[p.slug];
-  if (!c) return null;
-  return c.startsWith("/") ? c : `/assets/blog/${c}`;
+  if (c) return c.startsWith("/") ? c : `/assets/blog/${c}`;
+  return FEATURE_COVER[p.feature] || null; // fallback: foto de la función relacionada
 };
 const coverImg = (p) => {
   const src = coverPath(p);
@@ -1068,14 +1069,23 @@ const coverImg = (p) => {
     : `<span class="post-cover-ico">${iconFor(p.feature)}</span>`;
 };
 
+const BRAND = {
+  whatsapp: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.6 2.2-2.3-.6-.3.2A8.2 8.2 0 1 1 12 3.8Zm-3 3.4c-.15 0-.4.06-.6.3-.2.24-.78.77-.78 1.88 0 1.12.8 2.2.92 2.35.11.15 1.58 2.54 3.93 3.46 1.95.77 2.35.62 2.78.58.43-.04 1.36-.55 1.55-1.09.19-.54.19-1 .13-1.09-.06-.09-.22-.15-.46-.27-.24-.12-1.36-.67-1.57-.75-.21-.08-.36-.12-.51.12-.15.24-.58.75-.71.9-.13.15-.26.17-.5.06-.24-.12-1-.37-1.9-1.17-.7-.63-1.17-1.4-1.31-1.64-.13-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.5-1.28-.7-1.75-.18-.44-.36-.38-.5-.39Z"/></svg>',
+  facebook: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.6l.4-3.1h-3V7.9c0-.9.25-1.5 1.55-1.5H17V3.7c-.28-.04-1.2-.12-2.27-.12-2.25 0-3.8 1.37-3.8 3.9v2.42H8.3V13h2.63v8Z"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 3h3.1l-6.77 7.73L21.8 21h-5.86l-4.6-6.02L5.98 21H2.86l7.24-8.27L2.4 3h6l4.15 5.49Zm-1.09 16.13h1.72L7.65 4.77H5.8Z"/></svg>',
+  email: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v.35l8 5 8-5V6H4Zm16 2.72-7.47 4.67a1 1 0 0 1-1.06 0L4 8.72V18h16Z"/></svg>',
+  instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="16.7" cy="7.3" r="1.1" fill="currentColor" stroke="none"/></svg>',
+};
+
 const shareBar = (url, title) => {
   const u = encodeURIComponent(url);
   const t = encodeURIComponent(title);
   return `<div class="share reveal">
     <span class="share-lbl">Compartir</span>
-    <a class="share-btn" href="https://wa.me/?text=${t}%20${u}" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp">${icon("chat", "ic-sm")}</a>
-    <a class="share-btn" href="https://twitter.com/intent/tweet?url=${u}&text=${t}" target="_blank" rel="noopener" aria-label="Compartir en X">${icon("star", "ic-sm")}</a>
-    <a class="share-btn" href="mailto:?subject=${t}&body=${u}" aria-label="Compartir por email">${icon("bell", "ic-sm")}</a>
+    <a class="share-btn" href="https://wa.me/?text=${t}%20${u}" target="_blank" rel="noopener" aria-label="Compartir por WhatsApp">${BRAND.whatsapp}</a>
+    <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${u}" target="_blank" rel="noopener" aria-label="Compartir en Facebook">${BRAND.facebook}</a>
+    <a class="share-btn" href="https://twitter.com/intent/tweet?url=${u}&text=${t}" target="_blank" rel="noopener" aria-label="Compartir en X">${BRAND.x}</a>
+    <a class="share-btn" href="mailto:?subject=${t}&body=${u}" aria-label="Enviar por email">${BRAND.email}</a>
   </div>`;
 };
 
@@ -1110,6 +1120,7 @@ for (const p of POSTS) {
       </div>
     </header>
   </div>
+  ${coverPath(p) ? `<div class="wrap narrow"><figure class="post-cover-lead reveal"><img loading="lazy" src="${coverPath(p)}" alt="${esc(p.title)}"></figure></div>` : ""}
   <div class="wrap narrow">
     <div class="prose article-body reveal">
       ${p.body}

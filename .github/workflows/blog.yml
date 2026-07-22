@@ -35,9 +35,13 @@ jobs:
         with:
           branch: blog/post-automatico
           delete-branch: true
+          assignees: Velycio
+          reviewers: Velycio
           commit-message: "blog: nuevo artículo automático"
           title: "📝 Nuevo post del blog — revisa y pulsa Merge para publicar"
           body: |
+            @Velycio nuevo artículo listo para tu revisión.
+
             Artículo generado automáticamente por el agente semanal de Kalma.
 
             **Para publicarlo:** revisa el contenido y pulsa **Merge**. Se desplegará solo en kalmaapp.pro en 1-2 minutos.

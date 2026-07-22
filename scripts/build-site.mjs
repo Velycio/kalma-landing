@@ -786,6 +786,11 @@ const FEATURE_COVER = {
   "respiracion": "/assets/funciones/respiracion.jpg",
   "bolsa-rota": "/assets/funciones/bolsa-rota.jpg",
 };
+// Tarjeta de función con foto de portada (estilo home)
+const featCard = (f) =>
+  `<a class="card feat-card reveal" href="/funciones/${f.slug}.html">${
+    FEATURE_COVER[f.slug] ? `<div class="card-cover"><img loading="lazy" src="${FEATURE_COVER[f.slug]}" alt=""></div>` : ""
+  }<div class="ico" aria-hidden="true">${iconFor(f.slug)}</div><h3>${f.h1}</h3><p>${f.card}</p><span class="more">Ver función →</span></a>`;
 
 // Capturas reales de la app (carrusel) asignadas a cada función
 const SHOTS = {
@@ -947,10 +952,7 @@ for (const f of FEATURES) {
   const related = (f.related || [])
     .map((s) => featBySlug[s])
     .filter(Boolean)
-    .map(
-      (r) =>
-        `<a class="card reveal" href="/funciones/${r.slug}.html"><div class="ico" aria-hidden="true">${iconFor(r.slug)}</div><h3>${r.h1}</h3><p>${r.card}</p><span class="more">Ver función →</span></a>`
-    )
+    .map((r) => featCard(r))
     .join("");
   const postLinks = (f.posts || [])
     .map((s) => postBySlug[s])
@@ -991,8 +993,7 @@ for (const f of FEATURES) {
 
 /* ---------- Índice de funciones (agrupado por categoría) ---------- */
 {
-  const card = (f) =>
-    `<a class="card reveal" href="/funciones/${f.slug}.html"><div class="ico" aria-hidden="true">${iconFor(f.slug)}</div><h3>${f.h1}</h3><p>${f.card}</p><span class="more">Ver función →</span></a>`;
+  const card = (f) => featCard(f);
   const groups = CATS.map((c) => {
     const items = FEATURES.filter((f) => f.cat === c.key).sort((a, b) => a.order - b.order);
     if (!items.length) return "";

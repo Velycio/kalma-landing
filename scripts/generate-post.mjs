@@ -52,11 +52,16 @@ REGLAS DE SEGURIDAD (obligatorias, es contenido de salud):
 - Si el tema roza síntomas o señales de alarma, incluye en el body un bloque <div class="med"><b>Importante:</b> ...</div> remitiendo al profesional.
 - No inventes datos, cifras ni estudios concretos. Nada de promesas médicas.
 
+TEMAS (SEO / posicionamiento):
+- Elige temas basados en PREGUNTAS REALES y muy buscadas que las embarazadas escriben en Google (long-tail). Formatos típicos: "¿Es normal ... en el embarazo?", "¿Cuándo ...?", "¿Cómo ...?", "¿Qué ...?", "... semana a semana".
+- El TÍTULO suele ser esa misma pregunta o consulta habitual, con la palabra clave principal.
+- Responde la duda principal de forma clara YA en el PRIMER párrafo (para ganar el fragmento destacado de Google).
+- Usa <h2> planteando sub-preguntas concretas, con respuestas directas debajo. Incluye 2-3 FAQs.
+- Prioriza dudas frecuentes de embarazo, parto y postparto inmediato. Tema NUEVO, distinto de los ya publicados.
+
 CALIDAD:
-- 550-850 palabras. Primer párrafo que engancha. 2-3 <h2>. Incluye la palabra clave principal en el título y en el primer párrafo.
-- Enlaza al menos una vez a la función relacionada con <a href="/funciones/SLUG-FEATURE.html">.
+- 550-850 palabras. 2-3 <h2>. Enlaza al menos una vez a la función relacionada con <a href="/funciones/SLUG-FEATURE.html">.
 - HTML permitido en el body: <p>, <h2>, <h3>, <ul>/<ol>/<li>, <strong>/<b>, <a>, <blockquote class="pull">frase</blockquote>, <div class="med">, <div class="callout">.
-- Elige un tema NUEVO y útil, distinto de los ya publicados.
 
 Usa la herramienta "crear_post" para entregar el artículo.`;
 

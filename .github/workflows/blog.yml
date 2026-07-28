@@ -9,7 +9,7 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
+  issues: write
 
 jobs:
   nuevo-post:
@@ -30,21 +30,36 @@ jobs:
       - name: Regenerar el sitio
         run: node scripts/build-site.mjs
 
-      - name: Abrir Pull Request para tu revisión
-        uses: peter-evans/create-pull-request@v6
-        with:
-          branch: blog/post-automatico
-          delete-branch: true
-          assignees: Velycio
-          reviewers: Velycio
-          commit-message: "blog: nuevo artículo automático"
-          title: "📝 Nuevo post del blog — revisa y pulsa Merge para publicar"
-          body: |
-            @Velycio nuevo artículo listo para tu revisión.
+      # Datos del artículo recién generado (el .json más reciente de posts/)
+      - name: Leer el artículo generado
+        id: post
+        run: |
+          FILE=$(ls -t posts/*.json | head -1)
+          echo "slug=$(node -p "require('./$FILE').slug")" >> "$GITHUB_OUTPUT"
+          echo "title=$(node -p "require('./$FILE').title")" >> "$GITHUB_OUTPUT"
 
-            Artículo generado automáticamente por el agente semanal de Kalma.
+      # Publica directamente en main. GitHub Pages despliega solo en 1-2 min.
+      - name: Publicar en kalmaapp.pro
+        run: |
+          git config user.name "Kalma Bot"
+          git config user.email "info@velycio.com"
+          git add -A
+          git diff --staged --quiet && echo "Sin cambios, nada que publicar" && exit 0
+          git commit -m "blog: ${{ steps.post.outputs.title }}"
+          git push
 
-            **Para publicarlo:** revisa el contenido y pulsa **Merge**. Se desplegará solo en kalmaapp.pro en 1-2 minutos.
-            **Para descartarlo:** cierra este PR sin hacer merge.
+      # Aviso POSTERIOR: GitHub manda el email a info@velycio.com al abrir el issue.
+      - name: Avisar a Charly de que ya está publicado
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Publicado en el blog: ${{ steps.post.outputs.title }}" \
+            --assignee Velycio \
+            --body "Ya está en vivo: https://kalmaapp.pro/blog/${{ steps.post.outputs.slug }}.html
 
-            > Recuerda: es contenido de salud. Dale un vistazo antes de publicar.
+          Publicado automáticamente por el agente semanal de Kalma. No hace falta que hagas nada.
+
+          **Es contenido de salud.** Si al leerlo ves algo que no te cuadra, dilo y se retira: basta con borrar \`posts/${{ steps.post.outputs.slug }}.json\`, volver a generar el sitio y publicar.
+
+          Cierra este aviso cuando lo hayas leído."

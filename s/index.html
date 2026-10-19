@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Kalma</title>
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #FBF3EF; font-family: system-ui, -apple-system, sans-serif; color: #332B34; text-align: center; padding: 24px; }
+  a { color: #8A2457; font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+  <p>Te llevamos a Kalma…</p>
+  <p><a id="store" href="https://kalmaapp.pro/">Abrir la tienda</a></p>
+</main>
+<script>
+  // Enlace de compartir de Kalma: kalmaapp.pro/s/?i=<id>. El id es opaco y no
+  // contiene nada del embarazo. Se registra la apertura y se redirige a la tienda.
+  (function () {
+    var id = new URLSearchParams(location.search).get("i") || "";
+    var ios = /iphone|ipad|ipod|mac os/i.test(navigator.userAgent);
+    var fallback = ios ? "https://apps.apple.com/app/id6782036233" : "https://play.google.com/store/apps/details?id=com.kalma.app";
+    document.getElementById("store").href = fallback;
+    var go = function (url) { location.replace(url || fallback); };
+    var timer = setTimeout(function () { go(fallback); }, 1500);
+    fetch("https://ubtppgcrcvuvocitqxuy.supabase.co/functions/v1/kalma-share", {
+      method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ id: id, ua: navigator.userAgent })
+    }).then(function (r) { return r.json(); }).then(function (j) { clearTimeout(timer); go(j && j.store); })
+      .catch(function () { clearTimeout(timer); go(fallback); });
+  })();
+</script>
+</body>
+</html>

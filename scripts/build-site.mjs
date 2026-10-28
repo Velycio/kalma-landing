@@ -15,7 +15,8 @@ const SITE = {
   tagline: "Tu compañera de embarazo",
   org: "Velycio",
   email: "info@velycio.com",
-  build: "2026-07-19",
+  build: "2026-10-28",
+  appStore: "https://apps.apple.com/es/app/id6782036233",
 };
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -39,10 +40,12 @@ function header(active) {
   <nav class="nav-links" id="navmenu" aria-label="Principal">
     ${link("/sobre-nosotros/", "Sobre nosotros", "about")}
     ${link("/funciones/", "Funciones", "func")}
+    ${link("/kalma-plus/", "Kalma+", "kplus")}
+    ${link("/embarazo/", "Semana a semana", "weeks")}
     ${link("/blog/", "Blog", "blog")}
-    <a class="nav-cta" href="/#aviso">Avísame del lanzamiento</a>
+    <a class="nav-cta" href="${SITE.appStore}">Descargar gratis</a>
   </nav>
-  <a class="btn btn-primary nav-btn-desktop" href="/#aviso">Avísame del lanzamiento</a>
+  <a class="btn btn-primary nav-btn-desktop" href="${SITE.appStore}">Descargar gratis</a>
 </div></header>`;
 }
 
@@ -50,7 +53,7 @@ const FOOTER = `<footer><div class="wrap">
   <div class="foot">
     <div>
       <a class="brand" href="/" aria-label="Kalma"><img src="/assets/logo-rose.svg" alt="" width="30" height="30"><span>Kalma</span></a>
-      <p class="tag">La app gratuita que te acompaña semana a semana durante el embarazo. iPhone y Android.</p>
+      <p class="tag">La app gratuita que te acompaña semana a semana durante el embarazo. En iPhone; Android, muy pronto.</p>
       <a class="foot-ig" href="https://instagram.com/hello.kalma" target="_blank" rel="noopener" aria-label="Kalma en Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="16.7" cy="7.3" r="1.1" fill="currentColor" stroke="none"/></svg> @hello.kalma</a>
     </div>
     <div>
@@ -60,9 +63,11 @@ const FOOTER = `<footer><div class="wrap">
       <a href="/funciones/diario-de-embarazo.html">Diario de embarazo</a>
       <a href="/funciones/bebe-semana-a-semana.html">Bebé semana a semana</a>
       <a href="/funciones/">Ver todas</a>
+      <a href="/kalma-plus/">Kalma+</a>
     </div>
     <div>
       <h4>Recursos</h4>
+      <a href="/embarazo/">Embarazo semana a semana</a>
       <a href="/blog/">Blog</a>
       <a href="/sobre-nosotros/">Sobre nosotros</a>
       <a href="/privacidad/">Política de privacidad</a>
@@ -182,7 +187,7 @@ const icon = (key, cls = "ic") =>
   `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[key] || ""}</svg>`;
 
 const ctaBand = (h, p) =>
-  `<div class="cta-band reveal"><h2>${h}</h2><p>${p}</p><a class="btn" href="/#aviso">${icon("bell", "ic-inline")} Avísame del lanzamiento</a></div>`;
+  `<div class="cta-band reveal"><h2>${h}</h2><p>${p}</p><a class="btn" href="${SITE.appStore}">Descargar gratis en la App Store</a></div>`;
 
 /* ======================= FUNCIONES ======================= */
 const FEATURES = [
@@ -197,7 +202,7 @@ const FEATURES = [
       "App gratuita para contar contracciones en el móvil. Mide duración y frecuencia, detecta la regla 5-1-1 y te ayuda a saber cuándo llamar al hospital. iPhone y Android.",
     eyebrow: "Función · Parto",
     lead: "Cronometra cada contracción con un botón. Kalma calcula la duración, la frecuencia y el patrón 5-1-1, y comparte todo con tu pareja en tiempo real.",
-    card: "Registra cada contracción y detecta la regla 5-1-1 para saber cuándo ir al hospital.",
+    card: "Registra duración y frecuencia de cada contracción y compártelas con tu pareja y tu equipo sanitario.",
     body: `
 <p><strong>Kalma</strong> incluye un <strong>contador de contracciones gratuito</strong> para el móvil. Pulsas al empezar la contracción y al terminar; la app calcula sola cuánto ha durado y cada cuánto tiempo se repiten. Sin cuentas de pago, sin anuncios en mitad del parto.</p>
 
@@ -759,6 +764,8 @@ const POSTS = [
 
 // Posts adicionales generados por el bot (posts/*.json). Se añaden y se ordenan por fecha (más nuevo primero → portada del blog).
 const POSTS_DIR = resolve(ROOT, "posts");
+const WEEKS_FILE = resolve(ROOT, "data", "semanas.json");
+const WEEKS = existsSync(WEEKS_FILE) ? JSON.parse(readFileSync(WEEKS_FILE, "utf8")).sort((a, b) => a.semana - b.semana) : [];
 if (existsSync(POSTS_DIR)) {
   for (const file of readdirSync(POSTS_DIR).filter((f) => f.endsWith(".json")).sort()) {
     try {
@@ -980,9 +987,9 @@ for (const f of FEATURES) {
     <div class="feat-hero-ico" aria-hidden="true">${iconFor(f.slug)}</div>
     <span class="eyebrow">${f.eyebrow}</span>
     <h1>${f.h1}</h1>
-    ${f.free ? `<p style="margin:14px 0 0"><span class="pill free-tag">${icon("check", "ic-sm")} Gratis · iPhone y Android</span></p>` : ""}
+    ${f.free ? `<p style="margin:14px 0 0"><span class="pill free-tag">${icon("check", "ic-sm")} Gratis · iPhone</span></p>` : ""}
     <p class="lead">${f.lead}</p>
-    <a class="btn btn-primary" href="/#aviso">${icon("bell", "ic-inline")} Avísame del lanzamiento</a>
+    <a class="btn btn-primary" href="${SITE.appStore}">Descargar gratis</a>
   </section>
   ${FEATURE_COVER[f.slug] ? `<figure class="feat-cover reveal"><img loading="lazy" src="${FEATURE_COVER[f.slug]}" alt="${esc(f.h1)}"></figure>` : ""}
   <section class="prose feat-content">
@@ -1026,7 +1033,7 @@ for (const f of FEATURES) {
     <p class="lead">Las herramientas que de verdad usas durante el embarazo, organizadas por momento. Gratis y compartidas con tu pareja.</p>
   </section>
   ${groups}
-  ${ctaBand("Empieza a usar Kalma", "Gratis para iPhone y Android. Déjanos tu email y te avisamos del lanzamiento.")}
+  ${ctaBand("Empieza a usar Kalma", "Gratis en iPhone. Android, muy pronto.")}
 </div>`;
   write(
     "funciones/index.html",
@@ -1129,7 +1136,7 @@ for (const p of POSTS) {
     </div>
     ${shareBar(canonical, p.title)}
   </div>
-  ${ctaBand("Prueba Kalma gratis", "La app de embarazo que te acompaña semana a semana. Te avisamos en cuanto salga.")}
+  ${ctaBand("Prueba Kalma gratis", "La app de embarazo que te acompaña semana a semana. Gratis en iPhone.")}
   ${related ? `<div class="wrap"><section class="prose"><h2>Sigue leyendo</h2><div class="grid cols-2">${related}</div></section></div>` : ""}
 </article>`;
   const articleLD = {
@@ -1183,7 +1190,7 @@ for (const p of POSTS) {
 <div class="wrap">
   ${featuredCard}
   <div class="grid cols-3 blog-grid">${grid}</div>
-  ${ctaBand("Kalma, tu compañera de embarazo", "Gratis para iPhone y Android. Déjanos tu email y te avisamos del lanzamiento.")}
+  ${ctaBand("Kalma, tu compañera de embarazo", "Gratis en iPhone. Android, muy pronto.")}
 </div>`;
   const blogLD = {
     "@context": "https://schema.org",
@@ -1240,6 +1247,16 @@ for (const p of POSTS) {
     <p><em>Inés ya nació. Kalma se queda para acompañar a otras familias en el camino más importante de sus vidas. Ojalá te acompañe tanto como nos acompañó a nosotros.</em></p>
     <p class="signature">— Carlos, fundador de Kalma y Velycio</p>
   </section>
+  <section class="prose reveal">
+    <h2>Cómo ha crecido Kalma</h2>
+    <p>Empezamos con una beta cerrada y, versión a versión, hemos ido sumando lo que nos pedíais.</p>
+    <ul>
+      <li><strong>Kalma 2.0</strong>: todo lo del embarazo en una sola app: semanas, contracciones, patadas, citas y bolsa del hospital.</li>
+      <li><strong>Pareja conectada</strong>: lo vivís juntos desde dos móviles, en tiempo real.</li>
+      <li><strong>Diario y álbum</strong>: tus recuerdos y ecografías, guardados para siempre.</li>
+      <li><strong>Kalma 2.1</strong>: llega <a href="/kalma-plus/">Kalma+</a>, una compañera de inteligencia artificial que se acuerda de ti.</li>
+    </ul>
+  </section>
   <section class="prose">
     <h2>Por qué Kalma es diferente</h2>
     <div class="grid cols-3">${valueCards}</div>
@@ -1247,9 +1264,8 @@ for (const p of POSTS) {
   <div class="cta-band about-cta reveal">
     <div class="about-stars" aria-hidden="true">${icon("star", "st")}${icon("star", "st")}${icon("star", "st")}${icon("star", "st")}${icon("star", "st")}</div>
     <h2>Vive tu embarazo con Kalma</h2>
-    <p>Gratis, sin anuncios y para compartir con tu pareja. Muy pronto en iPhone y Android — sé de las primeras en tenerla.</p>
-    <a class="btn" href="/#aviso">${icon("bell", "ic-inline")} Avísame del lanzamiento</a>
-    <p class="about-cta-note">4,9★ de las mamás de nuestra beta · sin spam, solo el aviso de lanzamiento</p>
+    <p>Gratis y para compartir con tu pareja. Ya en iPhone; Android, muy pronto.</p>
+    <a class="btn" href="${SITE.appStore}">Descargar gratis en la App Store</a>
   </div>
 </div>`;
   write(
@@ -1355,11 +1371,133 @@ for (const p of POSTS) {
   );
 }
 
+/* ---------- Kalma+ (/kalma-plus/) ---------- */
+{
+  const canonical = `${SITE.domain}/kalma-plus/`;
+  const faq = [
+    ["¿Kalma+ es una persona?", "No. Kalma+ es una inteligencia artificial. Te responde, recuerda lo que le cuentas y te ayuda a organizarte, pero no es una matrona ni un médico."],
+    ["¿Necesito pagar para usar Kalma?", "No. Semanas, contracciones, patadas, citas, diario, bolsa del hospital y respiración son gratis. Kalma+ es opcional."],
+    ["¿Cuánto cuesta?", "Tienes 7 días gratis, sin tarjeta. Después eliges: 29,99 € en un único pago para todo el embarazo (hasta 3 meses después del parto) o 4,99 € al mes, que puedes cancelar cuando quieras."],
+    ["¿Cuántos mensajes incluye?", "Hasta 20 mensajes al día."],
+  ];
+  const jsonld = [
+    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: `${SITE.domain}/` },
+      { "@type": "ListItem", position: 2, name: "Kalma+", item: canonical } ] },
+  ];
+  const body = `
+<div class="wrap narrow">
+  <p class="crumb"><a href="/">Inicio</a> › Kalma+</p>
+  <section class="phero reveal">
+    <span class="eyebrow">Kalma+ · Compañera de inteligencia artificial</span>
+    <h1>Tu embarazo, una conversación que continúa</h1>
+    <p class="lead">Kalma+ es una compañera de IA para hablar de lo que estás viviendo y ayudarte a organizar tu día a día. A tu lado también a las 3 de la madrugada.</p>
+    <a class="btn btn-primary" href="${SITE.appStore}">Probar 7 días gratis</a>
+  </section>
+  <figure class="feat-cover reveal" style="max-width:360px;margin:24px auto"><img loading="lazy" src="/assets/kalma-plus-planes.jpg" width="760" height="1647" alt="Pantalla de Kalma+ con sus planes" style="border-radius:28px"></figure>
+  <section class="prose">
+    <h2>No tienes que contarlo todo otra vez</h2>
+    <p>Kalma+ recuerda lo importante de lo que le cuentas (lo que te dijo el médico, lo que te funcionó, tus dudas) para retomar la conversación con contexto. Puedes ver y borrar lo que recuerda cuando quieras.</p>
+    <h2>A veces, el primer mensaje llega de ella</h2>
+    <p>Kalma+ también te escribe primero para preguntarte cómo estás o recordarte que mañana tienes cita. Puedes apagarlo cuando quieras.</p>
+    <h2>Lo que quieres preguntar, apuntado</h2>
+    <p>Cuéntale tus próximas citas y las preguntas que quieres llevar a la matrona. Si le dices que sí, las deja apuntadas en tu agenda.</p>
+    <h2>Elige cómo quieres seguir</h2>
+    <div class="grid cols-2">
+      <div class="card"><h3>Todo el embarazo</h3><p><strong>29,99 €</strong> · pago único, sin renovación. Hasta 3 meses después del parto.</p></div>
+      <div class="card"><h3>Mensual</h3><p><strong>4,99 €/mes</strong> · suscripción que puedes cancelar cuando quieras.</p></div>
+    </div>
+    <p>Empiezas con <strong>7 días gratis, sin tarjeta</strong>. Al terminar, decides tú. Incluye hasta 20 mensajes al día.</p>
+    <h2>Tus herramientas de siempre siguen siendo gratis</h2>
+    <p>Respiración, contracciones, agenda, diario, bolsa rota, patadas y el bebé <a href="/embarazo/">semana a semana</a>: puedes seguir usándolos sin contratar Kalma+.</p>
+    <h2>Compañía con límites claros</h2>
+    <p>Kalma no es un producto sanitario. Kalma+ es una inteligencia artificial y puede equivocarse: no diagnostica ni sustituye a tu matrona, a tu médico ni a los servicios de emergencia. Ante una urgencia, llama al 112. Lee cómo tratamos tus datos en la <a href="/privacidad/">política de privacidad</a>.</p>
+    <h2>Preguntas frecuentes</h2>
+    ${faq.map(([q, a]) => `<h3>${q}</h3><p>${a}</p>`).join("\n    ")}
+  </section>
+  ${ctaBand("Un espacio para ti, dentro de Kalma", "Descarga Kalma gratis y prueba Kalma+ 7 días.")}
+</div>`;
+  write("kalma-plus/index.html", layout({ title: "Kalma+: tu compañera de IA durante el embarazo", desc: "Conoce Kalma+: una compañera de IA que recuerda lo que le cuentas y apunta citas y preguntas para la matrona. Prueba 7 días gratis. Desde 4,99 €/mes.", canonical, active: "kplus", jsonld, body }));
+}
+
+/* ---------- Embarazo semana a semana (/embarazo/ y /embarazo/semana-N/) ---------- */
+{
+  if (WEEKS.length) {
+    const tri = (n) => (n <= 13 ? 1 : n <= 27 ? 2 : 3);
+    const name = (n) => `Semana ${n}`;
+    for (const w of WEEKS) {
+      const n = w.semana;
+      const canonical = `${SITE.domain}/embarazo/semana-${n}/`;
+      const prev = WEEKS.find((x) => x.semana === n - 1);
+      const next = WEEKS.find((x) => x.semana === n + 1);
+      const jsonld = [
+        { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: w.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
+        { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Inicio", item: `${SITE.domain}/` },
+          { "@type": "ListItem", position: 2, name: "Embarazo semana a semana", item: `${SITE.domain}/embarazo/` },
+          { "@type": "ListItem", position: 3, name: name(n), item: canonical } ] },
+        { "@context": "https://schema.org", "@type": "Article", headline: w.titulo, inLanguage: "es-ES", dateModified: SITE.build, author: { "@type": "Organization", name: "Kalma" }, publisher: { "@type": "Organization", name: "Velycio" }, mainEntityOfPage: canonical },
+      ];
+      const body = `
+<div class="wrap narrow">
+  <p class="crumb"><a href="/">Inicio</a> › <a href="/embarazo/">Embarazo semana a semana</a> › ${name(n)}</p>
+  <section class="phero reveal">
+    <span class="eyebrow">${tri(n)}.º trimestre</span>
+    <h1>Semana ${n} de embarazo</h1>
+    <p class="lead">${esc(w.resumen)}</p>
+  </section>
+  <section class="prose article-body">
+    <h2>Cómo se desarrolla tu bebé</h2>
+    <p>${esc(w.bebe)}</p>
+    <h2>Cambios que puedes notar</h2>
+    <p>${esc(w.cuerpo)}</p>
+    <h2>Citas y pruebas: qué puede tocar</h2>
+    <p>${esc(w.pruebas)}</p>
+    <h2>Qué puedes hacer esta semana</h2>
+    <ul>${w.consejos.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
+    <h2>Cuándo contactar con tu equipo sanitario</h2>
+    <p>${esc(w.alerta)}${/112/.test(w.alerta) ? "" : " Ante una urgencia, llama al 112."}</p>
+    <h2>Preguntas frecuentes</h2>
+    ${w.faq.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join("\n    ")}
+    <h2>Fuentes</h2>
+    <p>Información general basada en ${w.fuentes.map((f) => { const m = /^\[(.+?)\]\((https?:\/\/[^)]+)\)$/.exec(f.trim()); return m ? `<a href="${esc(m[2])}" target="_blank" rel="noopener">${esc(m[1])}</a>` : esc(f); }).join(", ")}. No sustituye la valoración de tu matrona o tu médico.</p>
+    <p style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:28px">
+      ${prev ? `<a href="/embarazo/semana-${prev.semana}/">← Semana ${prev.semana}</a>` : "<span></span>"}
+      <a href="/embarazo/">Todas las semanas</a>
+      ${next ? `<a href="/embarazo/semana-${next.semana}/">Semana ${next.semana} →</a>` : "<span></span>"}
+    </p>
+  </section>
+  ${ctaBand("Lleva tu semana contigo", "Kalma te acompaña cada semana con tu bebé, tus citas y tus recuerdos. Gratis en iPhone.")}
+</div>`;
+      write(`embarazo/semana-${n}/index.html`, layout({ title: `${w.titulo} | Kalma`, desc: w.meta, canonical, active: "weeks", jsonld, body, ogType: "article" }));
+    }
+    const groups = [1, 2, 3].map((t) => {
+      const ws = WEEKS.filter((w) => tri(w.semana) === t);
+      return `<h2>${t}.º trimestre</h2><div class="grid cols-3">${ws.map((w) => `<a class="card" href="/embarazo/semana-${w.semana}/"><h3>Semana ${w.semana}</h3><p>${esc(w.resumen.split(". ")[0])}.</p></a>`).join("")}</div>`;
+    }).join("\n");
+    const body = `
+<div class="wrap">
+  <p class="crumb"><a href="/">Inicio</a> › Embarazo semana a semana</p>
+  <section class="phero reveal">
+    <span class="eyebrow">Guía</span>
+    <h1>Embarazo semana a semana</h1>
+    <p class="lead">Qué pasa con tu bebé y contigo en cada semana, qué pruebas suelen tocar y cuándo consultar. Las semanas se cuentan desde el primer día de tu última regla, por eso en las semanas 1 a 3 todavía no hay embarazo confirmado.</p>
+  </section>
+  <section class="prose">${groups}</section>
+  ${ctaBand("Tu semana, cada lunes en tu móvil", "Kalma te avisa de cada semana nueva y guarda tus citas y recuerdos. Gratis en iPhone.")}
+</div>`;
+    write("embarazo/index.html", layout({ title: "Embarazo semana a semana: guía completa | Kalma", desc: "Guía del embarazo semana a semana: desarrollo del bebé, cambios en tu cuerpo, pruebas habituales en España y cuándo consultar, de la semana 4 a la 41.", canonical: `${SITE.domain}/embarazo/`, active: "weeks", body }));
+  }
+}
+
 /* ---------- sitemap.xml ---------- */
 {
   const urls = [
     { loc: "/", pri: "1.0" },
     { loc: "/funciones/", pri: "0.8" },
+    { loc: "/kalma-plus/", pri: "0.8" },
+    ...(WEEKS.length ? [{ loc: "/embarazo/", pri: "0.9" }, ...WEEKS.map((w) => ({ loc: `/embarazo/semana-${w.semana}/`, pri: "0.8" }))] : []),
     { loc: "/blog/", pri: "0.7" },
     { loc: "/sobre-nosotros/", pri: "0.6" },
     { loc: "/privacidad/", pri: "0.3" },
@@ -1411,10 +1549,11 @@ ${CATS.map((c) => {
 ${POSTS.map((p) => `- [${p.title}](${SITE.domain}/blog/${p.slug}.html): ${p.metaDesc}`).join("\n")}
 
 ## Datos clave
-- Precio: gratis (free).
-- Plataformas: iOS (iPhone) y Android.
+- Precio: gratis. Kalma+ opcional (IA): 29,99 € pago único para todo el embarazo o 4,99 €/mes, 7 días de prueba.
+- Plataformas: iOS (iPhone). Android, próximamente.
 - Idioma: español.
-- Estado: beta cerrada; lanzamiento público próximamente. Lista de aviso en ${SITE.domain}/#aviso
+- Estado: disponible en la App Store: ${SITE.appStore}
+- Embarazo semana a semana: ${SITE.domain}/embarazo/
 - Contacto: ${SITE.email}
 `;
   write("llms.txt", llms);

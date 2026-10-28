@@ -815,7 +815,6 @@ const featCard = (f) =>
 
 // Capturas reales de la app (carrusel) asignadas a cada función
 const SHOTS = {
-  "contador-de-contracciones": { src: "screen-contractions.jpg", alt: "Pantalla del contador de contracciones de Kalma con cronómetro, métricas en tiempo real y aviso de la regla 5-1-1." },
   "bebe-semana-a-semana": { src: "screen-baby.jpg", alt: "Seguimiento del bebé semana a semana en Kalma: tamaño, peso y desarrollo." },
   "bolsa-rota": { src: "screen-waterbreak.jpg", alt: "Pantalla de bolsa rota de Kalma con cronómetro de la rotura de aguas." },
   "diario-de-embarazo": { src: "screen-diary.jpg", alt: "Diario de embarazo de Kalma con fotos y ecografías organizadas por semana." },
